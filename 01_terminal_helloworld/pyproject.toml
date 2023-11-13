@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helloworld-cli"
+version = "0.0.1"
+description = """A demo printing Hello World on stdout."""
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["python",
+	    "cli"]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development",
+]
+authors = [
+    {name = "Christian Buhtz", email = "c.buhtz@posteo.jp"}
+]
+
+[project.urls]
+homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+
+[tool.setuptools.package-dir]
+helloworld-cli = "src/helloworld_cli"
+
+[project.scripts]
+# Entry point: After installed the application can be run from shell via
+# and auto-generated "start script" named "/usr/bin/helloworld-cli"
+helloworld-cli = "helloworld_cli.__main__:main"
+
