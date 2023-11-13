@@ -4,11 +4,6 @@
 """
 
 
-def just_return_true():
-    """Used for unit test ilustration."""
-    return True
-
-
 def main():
     """The entry point for the application."""
     print('Hello World!')
