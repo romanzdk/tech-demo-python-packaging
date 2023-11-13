@@ -11,6 +11,8 @@ requires-python = ">=3.8"
 keywords = ["python",
 	    "cli"]
 license = {file = "LICENSE"}
+
+# More at https://pypi.org/classifiers/
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
@@ -33,10 +35,11 @@ homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
 [tool.setuptools.package-dir]
-helloworld-cli = "src/helloworld_cli"
+# Location of the package folder.
+helloworldcli = 'src/helloworld-cli'
 
 [project.scripts]
 # Entry point: After installed the application can be run from shell via
-# and auto-generated "start script" named "/usr/bin/helloworld-cli"
-helloworld-cli = "helloworld_cli.__main__:main"
+# and auto-generated "start script" named "$HOME/.local/bin/helloworldcli"
+helloworldcli = "helloworldcli.__main__:main"
 
