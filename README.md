@@ -8,6 +8,21 @@ The examples try to follow the current state of the art and official
 recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
 `--editable` option). More details can be found in the sub folders.
 
+## TOC
+
+- [Overview](#overview)
+- [Demo 01 - Simple terminal appliation](#demo-01---simple-terminal-appliation)
+  - [About Python Packaging](#about-python-packaging)
+  - [About the folder structure and the "src layout"](#about-the-folder-structure-and-the-src-layout)
+  - [Development Mode / Editabel installs](#development-mode--editabel-installs)
+- [Demo 02 - Simple GUI application](#demo-02---simple-gui-application)
+- [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03---internationalization-i18n-and-localization-l10n-using-gnu-gettext)
+- [Demo 04 - Start application "as root"](#demo-04---start-application-as-root)
+- [Demo 05 - Multiple import packages](#demo-05---multiple-import-packages)
+- [Eliminate redundant package informaton and centralize all meta data](#eliminate-redundant-package-informaton-and-centralize-all-meta-data)
+- [Real world examples](#real-world-examples)
+- [Further reading and official sources about Python Packaging](#further-reading-and-official-sources-about-python-packaging)
+
 # Overview
 Each one of the sub folders is one example can could be treated as a
 respository of its own.
@@ -85,6 +100,8 @@ the system. To install a package in _Development Mode_ `pip`'s option `-e` or `-
 [[01_terminal_helloworld.gif]]
 
 # Demo 02 - Simple GUI application
+
+[[02_gui_helloworld.gif]]
 
 # Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext
 
