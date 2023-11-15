@@ -14,7 +14,7 @@ recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
 - [Demo 01 - Simple terminal appliation](#demo-01-simple-terminal-appliation)
   - [About Python Packaging](#about-python-packaging)
   - [About the folder structure and the "src layout"](#about-the-folder-structure-and-the-src-layout)
-  - [Development Mode / Editabel installs](#development-mode--editabel-installs)
+  - [Development Mode / Editabel installs](#development-mode-editabel-installs)
 - [Demo 02 - Simple GUI application](#demo-02-simple-gui-application)
 - [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03-internationalization-i18n-and-localization-l10n-using-gnu-gettext)
 - [Demo 04 - Start application "as root"](#demo-04-start-application-as-root)
