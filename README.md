@@ -1,4 +1,4 @@
-# Python Packaing - A technical demonstration
+# Python Packaging - A technical demonstration
 
 The purpose of this repository is to illustrate the packaging of Python
 projects. As examples this repository contain multiple projects in different
@@ -11,7 +11,7 @@ recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
 ## TOC
 
 - [Overview](#overview)
-- [Demo 01 - Simple terminal appliation](#demo-01-simple-terminal-appliation)
+- [Demo 01 - Simple terminal application](#demo-01-simple-terminal-application)
   - [About Python Packaging](#about-python-packaging)
   - [About the folder structure and the "src layout"](#about-the-folder-structure-and-the-src-layout)
   - [Development Mode / Editabel installs](#development-mode-editabel-installs)
@@ -19,13 +19,12 @@ recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
 - [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03-internationalization-i18n-and-localization-l10n-using-gnu-gettext)
 - [Demo 04 - Start application "as root"](#demo-04-start-application-as-root)
 - [Demo 05 - Multiple import packages](#demo-05-multiple-import-packages)
-- [Eliminate redundant package informaton and centralize all meta data](#eliminate-redundant-package-informaton-and-centralize-all-meta-data)
+- [Eliminate redundant package information and centralize all meta data](#eliminate-redundant-package-information-and-centralize-all-meta-data)
 - [Real world examples](#real-world-examples)
 - [Further reading and official sources about Python Packaging](#further-reading-and-official-sources-about-python-packaging)
 
 # Overview
-Each one of the sub folders is one example can could be treated as a
-respository of its own.
+Each of the sub folders is one example and could be treated as a repository of its own.
 
  - `01_terminal_helloworld` - Simplest packaging and installing demo just print "Hello World" on standard output (usually the terminal).
  - `02_gui_helloworld` - Introduce the use of dependencies using a GUI to print "Hello World" in a window.
@@ -35,7 +34,7 @@ respository of its own.
 
 Please feel free to open issues.
 
-# Demo 01 - Simple terminal appliation
+# Demo 01 - Simple terminal application
 
 The project in the sub-folder [`01_terminal_helloworld`](01_terminal_helloworld) starts as simpelst application possible just printing `Hello World` to the terminal.
 The following concepts are illustrated:
@@ -85,7 +84,7 @@ While developing and testing a python project (not recommended!) constructs like
 The environment variable [`PYTHONPATH` and
 `sys.path`](https://docs.python.org/3/library/sys.html#sys.path) do define
 where the python interpreter looks for new modules. That variable was and is
-often manipulated to fullfill the developers needs. Today is no need anymore
+often manipulated to fulfil the developers needs. Today is no need anymore
 for risky and unstable hacks like this.
 
 The solution is the [Development Mode](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#working-in-development-mode)
@@ -94,22 +93,42 @@ also known as [editable install](https://pip-python3.readthedocs.io/en/latest/re
 The package in development is kind of *installed*. The Python interpreter see
 the package as it was installed. But because of symlinks used in that special
 mode the source files in the git repository are used. This also means that each
-modification on the source has an immediate effect on the package avilable to
+modification on the source has an immediate effect on the package available to
 the system. To install a package in _Development Mode_ `pip`'s option `-e` or `--editable` is used.
 
-[[01_terminal_helloworld.gif]]
+[[terminal_helloworld.gif]]
 
 # Demo 02 - Simple GUI application
 
-[[02_gui_helloworld.gif]]
+The second demo extends the previous [Demo 01]((#demo-01-simple-terminal-appliation). The string `Hello World!` now is shon in a GUI window. The handling of dependencies in the Python Packaging process will be illustrated.
+
+The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is used to create the window. The key difference to the previous demo is the use of the `dependencies` variable in the `pyproject.toml` file.
+
+    [project]
+    name = "helloworld-gui"
+
+    # ...
+
+    dependencies = [
+	"PySimpleGUI",
+    ]
+
+    # ...
+
+This results in installing depending packages in the back while installing the demo via `pip`.
+
+[[gui_helloworld.gif]]
 
 # Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext
+
+The third demo extends the previous [Demo 02](#demo-02-simple-gui-appliation). The [GNU gettext](https://www.gnu.org/software/gettext) localization framework is used to translate the string `Hello World!`. The translation itself is not the topic of this demo but the handling of the translational files is.
+
 
 # Demo 04 - Start application "as root"
 
 # Demo 05 - Multiple import packages
 
-# Eliminate redundant package informaton and centralize all meta data
+# Eliminate redundant package information and centralize all meta data
 
 # Real world examples
  - [Hyperorg](https://codeberg.org/buhtz/hyperorg) as a command line application.

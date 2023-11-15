@@ -9,9 +9,9 @@ def just_return_true():
 def open_main_window():
     """Construct and show the window."""
     main_window = sg.Window(
-        title="This is the GUI",
+        title=_('This is the GUI'),
         layout=[[
-            sg.Text('Hello World!')
+            sg.Text(_('Hello World!'))
         ]],
         margins=(200, 50)
     )
