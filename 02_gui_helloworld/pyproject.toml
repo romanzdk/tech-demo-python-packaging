@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "helloworld-gui"
+version = "0.0.1"
+description = """A demo show Hello World in a GUI window."""
+requires-python = ">=3.8"
+
+# Dependend packages are installed automatically.
+dependencies = [
+    "PySimpleGUI"
+]
+
+authors = [
+    {name = "Christian Buhtz", email = "c.buhtz@posteo.jp"}
+]
+
+[project.urls]
+homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+
+[tool.setuptools.package-dir]
+# Location of the package folder.
+helloworldgui = 'src/helloworld-gui'
+
+[project.scripts]
+# Entry point: After installed the application can be run from shell via
+# and auto-generated "start script" named "$HOME/.local/bin/helloworldgui"
+helloworldgui = "helloworldgui.__main__:main"
+
