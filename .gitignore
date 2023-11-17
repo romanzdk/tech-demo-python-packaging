@@ -5,6 +5,6 @@ __pycache__
 .#*
 \#*\#
 
-# Created by setuptools-gettext
+# Created by setuptools
 build
-locale
+locales

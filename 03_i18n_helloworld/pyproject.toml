@@ -36,7 +36,11 @@ helloworldint = "helloworldint.__main__:main"
 helloworldint = 'src/helloworld-int'
 
 [tool.setuptools.package-data]
-helloworldint = ['foo.txt']
+# Directories not allowed. Files only.
+helloworldint = [
+    'locales/*/LC_MESSAGES/*.mo',
+    'po/*.po',
+]
 
 # [tool.setuptools.command]
 # install = "foo:Foo"
