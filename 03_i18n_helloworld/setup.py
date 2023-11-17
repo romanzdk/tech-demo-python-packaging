@@ -1,17 +1,26 @@
-import setuptools
-# from setup.command.install import install
+from setuptools import Command, setup
+from setuptools.command.build import build
 
-class Foo(setuptools.Command):
+
+class CustomBuild(build):
+    sub_commands = [
+        ("foo", None),
+        *build.sub_commands
+    ]
+
+
+class Foo(build):
     def run(self):
         print('X' * 100)
-        print('IN Foo.run()')
+        print(f'{self.build_lib=}')
+        print('Z' * 100)
 
-        with open('foo.txt', 'w') as handle:
+        with open('./src/helloworld-int/foo.txt', 'w') as handle:
             handle.write('bin drin')
 
-
-setuptools.setup(
+setup(
     cmdclass={
-        'custom_command': Foo,
+        'build': CustomBuild,
+        'foo': Foo,
     }
 )

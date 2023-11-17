@@ -27,16 +27,16 @@ homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
 [project.scripts]
-# Entry point: After installed the application can be run from shell via
-# and auto-generated "start script" named "$HOME/.local/bin/helloworldgui"
+# Entry point: After installation the application can be run from shell via
+# auto-generated "start script" named "$HOME/.local/bin/helloworldgui"
 helloworldint = "helloworldint.__main__:main"
 
 [tool.setuptools.package-dir]
 # Location of the package folder.
 helloworldint = 'src/helloworld-int'
 
-# [options.package_data]
-# helloworldint = 'po/*'
+[tool.setuptools.package-data]
+helloworldint = ['foo.txt']
 
 # [tool.setuptools.command]
 # install = "foo:Foo"
