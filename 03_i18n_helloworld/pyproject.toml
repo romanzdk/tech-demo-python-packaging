@@ -2,7 +2,7 @@
 requires = [
     'setuptools',
     # https://github.com/breezy-team/setuptools-gettext
-    'setuptools-gettext@git+https://github.com/breezy-team/setuptools-gettext.git'
+    # 'setuptools-gettext@git+https://github.com/breezy-team/setuptools-gettext.git'
 ]
 build-backend = "setuptools.build_meta"
 
@@ -34,3 +34,9 @@ helloworldint = "helloworldint.__main__:main"
 [tool.setuptools.package-dir]
 # Location of the package folder.
 helloworldint = 'src/helloworld-int'
+
+# [options.package_data]
+# helloworldint = 'po/*'
+
+# [tool.setuptools.command]
+# install = "foo:Foo"

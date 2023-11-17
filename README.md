@@ -39,11 +39,11 @@ Please feel free to open issues.
 The project in the sub-folder [`01_terminal_helloworld`](01_terminal_helloworld) starts as simpelst application possible just printing `Hello World` to the terminal.
 The following concepts are illustrated:
 
- - Python Package configuration via `pyproject.toml`.
- - Elimination of redundancies in project meta data (e.g. version string, dependencies) through centralization.
- - Use the ["src layout"](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/) combined with [Development Mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) also known as _editable installation_ to avoid manipulation of `sys.path` and other `import` hacks.
+ - Python Package configuration via `pyproject.toml` ([PEP 621](https://peps.python.org/pep-0621))
+ - Elimination of redundancies in project meta data (e.g. version string, dependencies) through centralization into `pyproject.toml`.
+ - Use of the ["src layout"](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
  - Use of `__init__.py` and `__main__.py`.
- - Installing the package in _Developer Mode_ (aka "as editable").
+ - Installing the package in [Development Mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) also known as _editable installation_ to avoid manipulation of `sys.path` and other `import` hacks.
  - Run tests and the application itself.
 
 Please see the comments in the files themself for detailed explanations.
@@ -135,10 +135,14 @@ The third demo extends the previous [Demo 02](#demo-02-simple-gui-appliation). T
  - [Buhtzology](https://codeberg.org/buhtz/buhtzology) as a Python library.
 
 # Further reading and official sources about Python Packaging
- - [Python Packaging User Guide](https://packaging.python.org) especially its [section about the project layout](https://packaging.python.org/en/latest/tutorials/packaging-projects/) using a `src` folder and the discussion [src layout vs flat layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout).
+ - [Python Packaging User Guide](https://packaging.python.org) especially in there
+   - the [section about the project layout](https://packaging.python.org/en/latest/tutorials/packaging-projects/) using a `src` folder
+   - and the discussion [src layout vs flat layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout)
+   - and [the Packaing tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects).
  - [Configuring setuptools using `pyproject.toml`](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html)
  - [PEP 621 - Storing project metadata in `pyproject.tom`](https://peps.python.org/pep-0621)
- - 
+ - [The basics of Python packaging in early 2023](https://drivendata.co/blog/python-packaging-2023)
+ - [Python packages with pyproject.toml and nothing else](https://til.simonwillison.net/python/pyproject)
  
 <sub>November 2023</sub>
 
