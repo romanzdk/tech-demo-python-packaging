@@ -16,7 +16,7 @@ def main():
     # It installs the ``_()`` in the ``builtins`` namespace and eliminates
     # the need to ``import gettext`` and declare ``_()`` in each module.
     translation = gettext.translation(
-        domain='messages',
+        domain=helloworldint.__name__,
         localedir=localedir,
         fallback=True
     )
@@ -24,6 +24,7 @@ def main():
 
     print(f'{rc=}')
     print(f'{translation=}')
+    print(f'{localedir=}')
 
     print(_('Hello World!'))
     # Open the GUI window
