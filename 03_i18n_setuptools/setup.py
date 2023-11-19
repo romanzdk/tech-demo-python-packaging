@@ -13,16 +13,25 @@ know of a better one but would be happy if someone could provide one.
 
 
 class CustomBuild(build):
+    """This class overwrites the default build class.
+
+    The original list of build commands is shadowed and the custom build
+    command is injected as first entry. The commands from the original list
+    are appended again.
+
+    This approach comes from one of the setuptools maintainers:
+    https://github.com/pypa/setuptools/discussions/3912
+    """
     sub_commands = [
-        ("foo", None),
+        ("handletranslation", None),
         *build.sub_commands
     ]
 
 
-class Foo(build):
-    """/locales/fr_FR/LC_MESSAGES/messages.mo
-    msgfmt --output-file=../locales/de/LC_MESSAGES/helloworldint.mo de
+class HandleTranslation(build):
+    """Compile po into mo files using msgfmt.
     """
+
     def run(self):
         print('|==-- Custom build step preparing translation files. --==|')
 
@@ -46,7 +55,6 @@ class Foo(build):
             out_file = pkg_path / 'locales' / in_file.stem / 'LC_MESSAGES' \
                 / 'helloworldint.mo'
 
-            print(f'{out_file=}')
             # Create folder for output file
             out_file.parent.mkdir(parents=True)
 
@@ -59,14 +67,13 @@ class Foo(build):
 
             if rc.stderr:
                 raise RuntimeError(rc.stderr)
-            print(f'{out_file.exists()=}')
-            print(f'{rc=}')
 
         print('|==-- Custom build step completed. --==|')
+
 
 setup(
     cmdclass={
         'build': CustomBuild,
-        'foo': Foo,
+        'handletranslation': HandleTranslation,
     }
 )

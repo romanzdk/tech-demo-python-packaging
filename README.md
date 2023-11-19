@@ -17,6 +17,8 @@ recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
   - [Development Mode / Editabel installs](#development-mode-editabel-installs)
 - [Demo 02 - Simple GUI application](#demo-02-simple-gui-application)
 - [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03-internationalization-i18n-and-localization-l10n-using-gnu-gettext)
+  - [Demo 03 variant "setuptools"](#demo-03-variant-setuptools)
+  - [Demo 03 variant "hatch"](#demo-03-variant-hatch)
 - [Demo 04 - Start application "as root"](#demo-04-start-application-as-root)
 - [Demo 05 - Multiple import packages](#demo-05-multiple-import-packages)
 - [Eliminate redundant package information and centralize all meta data](#eliminate-redundant-package-information-and-centralize-all-meta-data)
@@ -123,6 +125,50 @@ This results in installing depending packages in the back while installing the d
 
 The third demo extends the previous [Demo 02](#demo-02-simple-gui-appliation). The [GNU gettext](https://www.gnu.org/software/gettext) localization framework is used to translate the string `Hello World!`. The translation itself is not the topic of this demo but the handling of the translational files is.
 
+Two variants of this demo exists. One do use the usual `setuptools` as build-backend and the second do use [`hatch`](https://hatch.pypa.io). The latter is used because it offers a more elegant, pythonic and easier to understand solution.
+
+## Demo 03 variant "setuptools"
+
+> **NOTE**:
+> Handle this example with care. It might not be the best solution nor it is
+> pythonic. Feel free to open an Issue to provide an easier and better
+> example.
+
+A custom build step is used to compile the `po`-files using `msgfmt` into
+`mo`-files. The `mo` files are included as `package-data` files while
+installing.
+
+There is a new folder `po` in the project containing two `po` and one `pot`
+file. 
+
+    03_i18n_setuptools
+	|-- README.md
+	|-- pyproject.toml
+	|-- setup.py
+	`-- src
+		`-- helloworld-int
+            |-- __init__.py
+            |-- __main__.py
+            `-- po
+                |-- de.po
+                |-- jp.po
+                `-- messages.pot
+
+The `pyproject.toml` do define `package-data`. While installing the
+build-backend `setuptools` will look for a folder `locales` and its content
+defined by the search pattern used here.
+
+	[tool.setuptools.package-data]
+	helloworldint = [
+		'locales/*/LC_MESSAGES/*.mo',
+	]
+
+This folder do not exist yet. There is a custom build step defined via
+`setup.py` file. This step will compile the `po` into `mo` files and place
+them in the right place inside the projects source directory (not the install
+directory!). See the `setup.py` for details.
+
+## Demo 03 variant "hatch"
 
 # Demo 04 - Start application "as root"
 

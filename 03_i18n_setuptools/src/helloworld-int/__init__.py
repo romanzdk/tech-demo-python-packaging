@@ -1,11 +1,6 @@
 import PySimpleGUI as sg
 
 
-def just_return_true():
-    """Used for unit test illustration."""
-    return True
-
-
 def open_main_window():
     """Construct and show the window."""
     main_window = sg.Window(
