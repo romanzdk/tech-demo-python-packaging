@@ -28,7 +28,6 @@ hallowelt = "helloworldint.__main__:main"
 packages = ['src/helloworldint']
 
 [tool.hatch.build]
-include = ['src/helloworldint']
 exclude = ['src/helloworldint/po']
 artifacts = ['src/helloworldint/locales/*/LC_MESSAGES/*.mo']
 
