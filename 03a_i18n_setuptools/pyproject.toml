@@ -25,10 +25,10 @@ homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
 [project.scripts]
-helloworldint = "helloworldint.__main__:main"
+hallowelt = "helloworldint.__main__:main"
 
 [tool.setuptools.package-dir]
-helloworldint = 'src/helloworld-int'
+helloworldint = 'src/helloworldint'
 
 [tool.setuptools.package-data]
 # Directories not allowed. Files only.

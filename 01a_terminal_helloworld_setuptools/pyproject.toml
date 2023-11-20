@@ -36,10 +36,10 @@ repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
 [tool.setuptools.package-dir]
 # Location of the package folder.
-helloworldcli = 'src/helloworld-cli'
+helloworldcli = 'src/helloworldcli'
 
 [project.scripts]
-# Entry point: After installed the application can be run from shell via
-# and auto-generated "start script" named "$HOME/.local/bin/helloworldcli"
-helloworldcli = "helloworldcli.__main__:main"
+# Entry point: After installed the application can be run from shell via and
+# auto-generated "start script" named "$HOME/.local/bin/helloworldterminal"
+helloworldterminal = "helloworldcli.__main__:main"
 

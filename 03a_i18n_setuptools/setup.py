@@ -38,7 +38,7 @@ class HandleTranslation(build):
         # Check if "msgfmt" is available
         if not shutil.which('msgfmt'):
             raise OSError(
-                'Executable "msgfmt" (from GNU gettext toots) is not '
+                'Executable "msgfmt" (from GNU gettext tools) is not '
                 'available. Please install it via a package manager of '
                 'your trust. In most cases "msgfmt" is part of "gettext".')
 

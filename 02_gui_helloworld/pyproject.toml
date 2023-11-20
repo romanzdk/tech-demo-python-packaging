@@ -23,10 +23,10 @@ repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
 [tool.setuptools.package-dir]
 # Location of the package folder.
-helloworldgui = 'src/helloworld-gui'
+helloworldgui = 'src/helloworldgui'
 
 [project.scripts]
 # Entry point: After installed the application can be run from shell via
-# and auto-generated "start script" named "$HOME/.local/bin/helloworldgui"
-helloworldgui = "helloworldgui.__main__:main"
+# and auto-generated "start script" named "$HOME/.local/bin/helloworldwindow"
+helloworldwindow = "helloworldgui.__main__:main"
 

@@ -28,11 +28,17 @@ recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
 # Overview
 Each of the sub folders is one example and could be treated as a repository of its own.
 
- - `01_terminal_helloworld` - Simplest packaging and installing demo just print "Hello World" on standard output (usually the terminal).
+ - `01a_terminal_helloworld_setuptools` - Simplest packaging and installing demo just print "Hello World" on standard output (usually the terminal).
+ - `01b_terminal_helloworld_hatch` - Similar to the previous example
+   `01a_terminal_helloworld_setuptools` but using
+   `hatch` as build backend.
  - `02_gui_helloworld` - Introduce the use of dependencies using a GUI to print "Hello World" in a window.
- - `03_i18n_helloworld` - Using GNU gettext to introduce translation of strings.
+ - `03a_i18n_setuptools` - Using GNU gettext to introduce translation of strings.
+ - `03b_i18n_hatch` - Similar to the previous example `03a_i18n_setuptools`
+   but using `hatch` as build backend.
  - `04_user_and_as_root` - Run the application as regular user and "as root".
- - `05_two_import_packages` - Offer a command line and graphical interface to demonstrate two Import Packages in one Distripution package.
+ - `05_two_import_packages` - Offer a command line and graphical interface to
+   demonstrate two Import Packages in one Distripution package.
 
 Please feel free to open issues.
 
