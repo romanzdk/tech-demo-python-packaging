@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "howareyouworld"
+version = "0.0.1"
+description = """Two import packages in one distribution package."""
+requires-python = ">=3.8"
+readme = "README.md"
+license = {file = "LICENSE"}
+
+authors = [
+    {name = "Christian Buhtz", email = "c.buhtz@posteo.jp"}
+]
+
+[project.urls]
+homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+
+# The names of this variables corresponds to the names of the import packages.
+[tool.setuptools.package-dir]
+helloworldpkg = 'src/helloworld'
+howareyoupkg = 'src/howareyou'
+
+# The names of this variables corresponds to the shell commands.
+[project.scripts]
+helloworldcli = "helloworldpkg.__main__:main"
+howareyoucli = "howareyoupkg.__main__:main"
+

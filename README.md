@@ -1,3 +1,7 @@
+<sub>November 2023</sub>
+> **NOTE**: The code in this repository and its documentation is still work in
+> progress but will be completed soon.
+
 # Python Packaging - A technical demonstration
 
 The purpose of this repository is to illustrate the packaging of Python
@@ -177,6 +181,16 @@ directory!). See the `setup.py` for details.
 ## Demo 03 variant "hatch"
 
 # Demo 04 - Start application "as root"
+> **ATTENTION**:
+> In its current state this technical demo do not work and need assistance.
+> The issues are described in more details below.
+
+> **WARNING**:
+> This demo propagates to install it using `sudo -H`. This is prohibited
+> because of [security reasons](https://askubuntu.com/a/802594/416969).
+> The author is open for alternative solutions.
+
+Install via `sudo --set-home python3 -m pip install .`.
 
 # Demo 05 - Multiple import packages
 
@@ -195,6 +209,7 @@ directory!). See the `setup.py` for details.
  - [PEP 621 - Storing project metadata in `pyproject.tom`](https://peps.python.org/pep-0621)
  - [The basics of Python packaging in early 2023](https://drivendata.co/blog/python-packaging-2023)
  - [Python packages with pyproject.toml and nothing else](https://til.simonwillison.net/python/pyproject)
+ - [Answer to "Is `sudo pip install` still a broken practice?" at AskUbuntu.com](https://askubuntu.com/a/802594/416969)
  
 <sub>November 2023</sub>
 

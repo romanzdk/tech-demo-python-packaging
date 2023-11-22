@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rootusergui"
+version = "0.0.1"
+description = """A demo application executable as user and root."""
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["PyQt5"]
+
+[tool.setuptools.package-dir]
+rootusergui = 'src/rootuser'
+
+[project.scripts]
+usergui = "rootusergui.__main__:main"
+rootgui = "rootusergui.__main__:run_main_as_root_via_policykit"
