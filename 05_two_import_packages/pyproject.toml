@@ -18,13 +18,12 @@ authors = [
 homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
-# The names of this variables corresponds to the names of the import packages.
+# Import Packages pointing to their package folders
 [tool.setuptools.package-dir]
 helloworldpkg = 'src/helloworld'
 howareyoupkg = 'src/howareyou'
 
-# The names of this variables corresponds to the shell commands.
+# The executable scripts (entry points)
 [project.scripts]
 helloworldcli = "helloworldpkg.__main__:main"
 howareyoucli = "howareyoupkg.__main__:main"
-

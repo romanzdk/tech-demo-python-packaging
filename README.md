@@ -1,4 +1,4 @@
-<sub>November 2023</sub>
+<sub>December 2023</sub>
 > **NOTE**: The code in this repository and its documentation is still work in
 > progress but will be completed soon.
 
@@ -41,8 +41,7 @@ Each of the sub folders is one example and could be treated as a repository of i
  - `03b_i18n_hatch` - Similar to the previous example `03a_i18n_setuptools`
    but using `hatch` as build backend.
  - `04_user_and_as_root` - Run the application as regular user and "as root".
- - `05_two_import_packages` - Offer a command line and graphical interface to
-   demonstrate two Import Packages in one Distripution package.
+ - `05_two_import_packages` - Demonstrate two Import Packages in one Distripution package and other naming issues.
 
 Please feel free to open issues.
 
@@ -181,18 +180,71 @@ directory!). See the `setup.py` for details.
 ## Demo 03 variant "hatch"
 
 # Demo 04 - Start application "as root"
-> **ATTENTION**:
-> In its current state this technical demo do not work and need assistance.
-> The issues are described in more details below.
 
 > **WARNING**:
 > This demo propagates to install it using `sudo -H`. This is prohibited
 > because of [security reasons](https://askubuntu.com/a/802594/416969).
 > The author is open for alternative solutions.
 
-Install via `sudo --set-home python3 -m pip install .`.
+> **ATTENTION**:
+> In its current state this technical demo do not work and need assistance.
+> The issues are described in more details below.
+
+This is the error message
+
+```
+Running with PID "6923" as user "root".
+Authorization required, but no authorization protocol specified
+
+qt.qpa.xcb: could not connect to display :10.0
+qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, xcb.
+```
+
+In the screencast below I do install usually as a user via `python3 -m pip install .` On some systems it might help to install with admin rights via `sudo --set-home python3 -m pip install .`. Otherwise the "run as root" entry point scripts won't find the Python sources files. But I am not sure about it and I also don't think that this is the reason for the main problem.
+
+[[gui_as_root.gif]]
 
 # Demo 05 - Multiple import packages
+In this demo the two terms [Distribution Package](https://packaging.python.org/en/latest/glossary/#term-Distribution-Package) and [Import Package](https://packaging.python.org/en/latest/glossary/#term-Import-Package) are explained. A Distribution Package is the entity or the name you do use when installing "a package" via `pip` (e.g. from PyPI). In this example it is `howareyouworld`. An Import Package is the name you do use in Python code when using the `import` statement. In this example there are two Import Packages named `helloworldpkg` and `howareyoupkg`. Additionally this example do installs two start scripts (entry points) named `helloworldcli` and `howareyoucli`. And as last the name of the package folders (inside `/src`) are `helloworld` and `howareyou`. The key fact is that all these elements having different names. In most projects the names will be the same and not different.
+
+See the `pyproject.toml` to see how these names are definied:
+
+
+    # Distribution Package
+    [project]
+    name = "howareyouworld"
+
+    # Import Packages pointing to their package folders
+    [tool.setuptools.package-dir]
+    helloworldpkg = 'src/helloworld'
+    howareyoupkg = 'src/howareyou'
+
+    # The executable scripts (entry points)
+    [project.scripts]
+    helloworldcli = "helloworldpkg.__main__:main"
+    howareyoucli = "howareyoupkg.__main__:main"
+
+After installation using `pip` (see previous demos) the code can be used in several ways:
+
+    $ python3 -m pip install .
+    ...
+    Successfully installed howareyouworld-0.0.1
+
+    $ helloworldcli
+    Hello World!
+
+    $ howareyoucli
+    Hello World!
+    How are you?                                                                                     
+
+    $ python3
+    >>> import helloworldpkg
+    >>> import howareyoupkg
+
+The package `howareyoupkg` do depend on `helloworldpkg`. See the file `src/howareyou/__main__.py` for details.
 
 # Eliminate redundant package information and centralize all meta data
 
@@ -207,9 +259,10 @@ Install via `sudo --set-home python3 -m pip install .`.
    - and [the Packaing tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects).
  - [Configuring setuptools using `pyproject.toml`](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html)
  - [PEP 621 - Storing project metadata in `pyproject.tom`](https://peps.python.org/pep-0621)
+ - [PEP 517 – A build-system independent format for source trees](https://peps.python.org/pep-0517)
  - [The basics of Python packaging in early 2023](https://drivendata.co/blog/python-packaging-2023)
  - [Python packages with pyproject.toml and nothing else](https://til.simonwillison.net/python/pyproject)
  - [Answer to "Is `sudo pip install` still a broken practice?" at AskUbuntu.com](https://askubuntu.com/a/802594/416969)
  
-<sub>November 2023</sub>
+<sub>December 2023</sub>
 
