@@ -50,8 +50,6 @@ class TranslationFilesHook(BuildHookInterface):
     def initialize(self, version, build_data):
         """
         """
-        # print(f'INITIALIZE\n\t{version=}\n\t{build_data=}')
-        # print(f'\t{self.PLUGIN_NAME=}\n\t{self.root=}\n\t{self.directory=}')
         print('|==-- Custom build step preparing translation files. --==|')
 
         self._check_compile_command()
@@ -74,7 +72,3 @@ class TranslationFilesHook(BuildHookInterface):
 
         print('|==-- Custom build step completed. --==|')
 
-
-    # def finalize(self, version, build_data, artifact_path):
-    #     print(f'FINALZE\n\t{version=}\n\t{build_data=}\n\t{artifact_path=}')
-    #     print(f'\t{self.PLUGIN_NAME=}\n\t{self.root=}\n\t{self.directory=}')

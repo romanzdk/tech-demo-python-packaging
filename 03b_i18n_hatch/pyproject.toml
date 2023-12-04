@@ -1,25 +1,18 @@
 [build-system]
 requires = ['hatchling']
 build-backend = 'hatchling.build'
-# See https://hatch.pypa.io for more details about that build system.
 
 [project]
 name = "helloworld-international"
 version = "0.0.1"
 description = """A demo translating Hello World in a GUI window."""
+readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.8"
 
 dependencies = [
     "PySimpleGUI",
 ]
-
-authors = [
-    {name = "Christian Buhtz", email = "c.buhtz@posteo.jp"}
-]
-
-[project.urls]
-homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
-repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
 [project.scripts]
 hallowelt = "helloworldint.__main__:main"
@@ -35,4 +28,3 @@ artifacts = ['src/helloworldint/locales/*/LC_MESSAGES/*.mo']
 # by default.
 # [tool.hatch.build.hooks.custom]
 # path = 'hatch_build.py'
-

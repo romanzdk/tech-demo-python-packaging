@@ -1,28 +1,18 @@
 [build-system]
-requires = [
-    'setuptools',
-    # https://github.com/breezy-team/setuptools-gettext
-    # 'setuptools-gettext@git+https://github.com/breezy-team/setuptools-gettext.git'
-]
+requires = ['setuptools']
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "helloworld-international"
 version = "0.0.1"
 description = """A demo translating Hello World in a GUI window."""
+readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.8"
 
 dependencies = [
     "PySimpleGUI",
 ]
-
-authors = [
-    {name = "Christian Buhtz", email = "c.buhtz@posteo.jp"}
-]
-
-[project.urls]
-homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
-repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
 [project.scripts]
 hallowelt = "helloworldint.__main__:main"
@@ -31,7 +21,7 @@ hallowelt = "helloworldint.__main__:main"
 helloworldint = 'src/helloworldint'
 
 [tool.setuptools.package-data]
-# Directories not allowed. Files only.
+# Keep in mind: Directories not allowed. Files only.
 helloworldint = [
     'locales/*/LC_MESSAGES/*.mo',
 ]
