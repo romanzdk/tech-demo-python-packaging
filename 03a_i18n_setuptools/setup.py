@@ -43,7 +43,7 @@ class HandleTranslation(build):
                 'your trust. In most cases "msgfmt" is part of "gettext".')
 
         # Location of the package
-        pkg_path = Path.cwd() / 'src' / 'helloworld-int'
+        pkg_path = Path.cwd() / 'src' / 'helloworldint'
         print(f'{pkg_path=}')
 
         # Collect all po files
