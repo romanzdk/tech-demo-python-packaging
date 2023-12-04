@@ -48,8 +48,6 @@ class TranslationFilesHook(BuildHookInterface):
             raise RuntimeError(rc.stderr)
 
     def initialize(self, version, build_data):
-        """
-        """
         print('|==-- Custom build step preparing translation files. --==|')
 
         self._check_compile_command()

@@ -26,5 +26,5 @@ artifacts = ['src/helloworldint/locales/*/LC_MESSAGES/*.mo']
 
 # The hatch build-backend looks for custom build steps in "hatch_build.py"
 # by default.
-# [tool.hatch.build.hooks.custom]
+[tool.hatch.build.hooks.custom]
 # path = 'hatch_build.py'

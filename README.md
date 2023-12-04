@@ -189,9 +189,9 @@ file.
 	├── pyproject.toml
 	├── setup.py
 	└── src
-            └── helloworld-int
-	        ├── __init__.py
-	        ├── __main__.py
+            └── helloworldint
+                ├── __init__.py
+                ├── __main__.py
                 └── po
                     ├── de.po
                     ├── jp.po
