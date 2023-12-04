@@ -146,9 +146,8 @@ The usage of `pip` do not change.
 
 # Demo 02 - Simple GUI application
 
-The second demo extends the previous [Demo 01]((#demo-01-simple-terminal-appliation). The string `Hello World!` now is shon in a GUI window. The handling of dependencies in the Python Packaging process will be illustrated.
-
-The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is used to create the window. The key difference to the previous demo is the use of the `dependencies` variable in the `pyproject.toml` file.
+That demo illustrates the handling of dependencies in the Python Packaging process with displaying the string `Hello World!` in a GUI window. 
+The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is the dependency and used to create the window. The key difference to the previous demo is the use of the `dependencies` variable in the `pyproject.toml` file.
 
     [project]
     name = "helloworld-gui"
@@ -156,7 +155,7 @@ The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is used to create t
     # ...
 
     dependencies = [
-	"PySimpleGUI",
+        "PySimpleGUI",
     ]
 
     # ...
