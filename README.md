@@ -47,25 +47,23 @@ Please feel free to open issues.
 
 # Demo 01 - Simple terminal application
 
-The project in the sub-folder [`01_terminal_helloworld`](01_terminal_helloworld) starts as simpelst application possible just printing `Hello World` to the terminal.
-The following concepts are illustrated:
+This demo starts as simpelst application possible just printing `Hello World` to the terminal to illustrate basic concepts of modern Python packaging and build-systems. The demo comes in two variants differing by the used build-backends `setuptools` and `hatch`. These concepts are covered by this demo:
 
  - Python Package configuration via `pyproject.toml` ([PEP 621](https://peps.python.org/pep-0621))
- - Elimination of redundancies in project meta data (e.g. version string, dependencies) through centralization into `pyproject.toml`.
  - Use of the ["src layout"](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
- - Use of `__init__.py` and `__main__.py`.
  - Installing the package in [Development Mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) also known as _editable installation_ to avoid manipulation of `sys.path` and other `import` hacks.
  - Run tests and the application itself.
+ - Use of `__init__.py` and `__main__.py`.
 
-Please see the comments in the files themself for detailed explanations.
+The comments in the files do contain more detailed explanations.
 
 ## About Python Packaging
 
-How to tie up a Python package is easy but the topic itself is not. The latter is because since Python was born in 1991 and while it's ongoing evolution multiple packaging systems has been created. Keep this in mind when looking around for alternative documentation and tutorials and look on their dates because they might be outdated.
+How to tie up a Python package is easy but the topic itself is not. The latter is because since Python was born in 1991 and while it's [ongoing evolution multiple packaging systems](https://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/history.html) has been created. Keep this in mind when looking around for alternative documentation and tutorials and look on their dates because they might be outdated.
 
 ## About the folder structure and the "src layout"
 
-This is the so called [src layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
+This is an example of the so called [src layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/). The package-folder `helloworld-cli` is separated in a sub-folder named `src`. If you have no good reason agsinst it do it that way.
 
     01_terminal_helloworld
     ├── LICENSE
@@ -78,11 +76,9 @@ This is the so called [src layout](https://packaging.python.org/en/latest/discus
     └── tests
 	└── test_dummy.py
 
-The difference between _Distribution Packages_ and _Import Packages_ and the consequences in naming them are described in a later demo.
-
 ## Development Mode / Editabel installs
 
-While developing and testing a python project (not recommended!) constructs like this are often used.
+While developing and testing a Python project (not recommended!) constructs like this are often used.
 
     # Don't do this at home!!!
     import unittest
@@ -96,7 +92,7 @@ The environment variable [`PYTHONPATH` and
 `sys.path`](https://docs.python.org/3/library/sys.html#sys.path) do define
 where the python interpreter looks for new modules. That variable was and is
 often manipulated to fulfil the developers needs. Today is no need anymore
-for risky and unstable hacks like this.
+for risky and unstable hacks like this. Never touch `sys.path`.
 
 The solution is the [Development Mode](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#working-in-development-mode)
 also known as [editable install](https://pip-python3.readthedocs.io/en/latest/reference/pip_install.html#editable-installs)
@@ -107,7 +103,44 @@ mode the source files in the git repository are used. This also means that each
 modification on the source has an immediate effect on the package available to
 the system. To install a package in _Development Mode_ `pip`'s option `-e` or `--editable` is used.
 
+## Demo 01 variant "setuptools"
+
+All package related information including how to build it is located only one file named `pyproject.toml`.
+
+    [build-system]
+    requires = ["setuptools"]
+    build-backend = "setuptools.build_meta"
+
+    # ...
+
+    [project]
+    name = "helloworld-cli"
+    version = "0.0.1"
+
+    [project.scripts]
+    helloworldterminal = "helloworldcli.__main__:main"
+
+    [tool.setuptools.package-dir]
+    helloworldcli = 'src/helloworldcli'
+
+The first three lines specifing the `[build-system]`. In this demo it is the often used `setuptools`. The section `[tools.setuptools.package-dir]` do point to the location of the package files. And `helloworldterminal` in section `[project.scripts]` do name the executable of that package.
+
 [[terminal_helloworld.gif]]
+
+## Demo 01 variant "hatch"
+
+A lot of alterntive build-systems do exists and can be used. The differences and use cases can not be covered here. Using [`hatch`](https://hatch.pypa.io) just ilustrates how to setup a build-backend in the `pyproject.toml`.
+
+    [build-system]
+    requires = ['hatchling']
+    build-backend = 'hatchling.build'
+
+    # ...
+
+    [tool.hatch.build.targets.wheel]
+    packages = ['src/helloworldcli']
+
+The usage of `pip` do not change.
 
 # Demo 02 - Simple GUI application
 

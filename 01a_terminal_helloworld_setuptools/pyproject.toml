@@ -7,10 +7,10 @@ name = "helloworld-cli"
 version = "0.0.1"
 description = """A demo printing Hello World on stdout."""
 readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.8"
 keywords = ["python",
 	    "cli"]
-license = {file = "LICENSE"}
 
 # More at https://pypi.org/classifiers/
 classifiers = [
@@ -34,12 +34,11 @@ authors = [
 homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
 
-[tool.setuptools.package-dir]
-# Location of the package folder.
-helloworldcli = 'src/helloworldcli'
-
 [project.scripts]
-# Entry point: After installed the application can be run from shell via and
+# Entry point: After installation the application can be run from shell via
 # auto-generated "start script" named "$HOME/.local/bin/helloworldterminal"
 helloworldterminal = "helloworldcli.__main__:main"
 
+[tool.setuptools.package-dir]
+# Location of the package folder.
+helloworldcli = 'src/helloworldcli'
