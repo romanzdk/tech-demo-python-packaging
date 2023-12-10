@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fruits"
+version = "0.0.1"
+description = """A demo demonstrating test coverage."""
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+
+[project.scripts]
+fruits = "fruits.__main__:main"
+
+[tool.setuptools.package-dir]
+fruits = 'src/fruits'
