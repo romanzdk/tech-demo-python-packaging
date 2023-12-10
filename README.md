@@ -307,6 +307,25 @@ After installation using `pip` (see previous demos) the code can be used in seve
 
 The package `howareyoupkg` do depend on `helloworldpkg`. See the file `src/howareyou/__main__.py` for details.
 
+# Demo 06 - Reporting test coverage
+tests/test_fruits.py::TestJustTrue::test_true PASSED                             [ 25%]
+tests/test_fruits.py::TestTrueOrFalse::test_error PASSED                         [ 50%]
+tests/test_fruits.py::TestTrueOrFalse::test_false PASSED                         [ 75%]
+tests/test_fruits.py::TestTrueOrFalse::test_true PASSED                          [100%]
+
+Name                                                           Stmts   Miss  Cover
+----------------------------------------------------------------------------------
+/usr/local/lib/python3.9/dist-packages/iniconfig/__init__.py     122     99    19%
+/usr/local/lib/python3.9/dist-packages/tomli/__init__.py           4      0   100%
+/usr/local/lib/python3.9/dist-packages/tomli/_parser.py          458    193    58%
+/usr/local/lib/python3.9/dist-packages/tomli/_re.py               35     20    43%
+/usr/local/lib/python3.9/dist-packages/tomli/_types.py             4      0   100%
+src/fruits/__init__.py                                             8      0   100%
+tests/__init__.py                                                  0      0   100%
+tests/test_fruits.py                                              12      0   100%
+----------------------------------------------------------------------------------
+TOTAL                                                            643    312    51%
+
 # Eliminate redundant package information and centralize all meta data
 
 # Real world examples

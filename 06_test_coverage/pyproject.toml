@@ -14,4 +14,9 @@ requires-python = ">=3.8"
 fruits = "fruits.__main__:main"
 
 [tool.setuptools.package-dir]
-fruits = 'src/fruits'
+fruits = "src/fruits"
+
+[tool.coverage.run]
+command_line = "--module pytest"
+source = ["."]
+omit = ["*/tests/*"]

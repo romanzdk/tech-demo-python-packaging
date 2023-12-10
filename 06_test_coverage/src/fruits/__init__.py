@@ -3,10 +3,10 @@ def just_return_true():
 
 
 def true_or_false(val):
-    if val:
+    if val is True:
         return 'TRUE'
 
-    if not val:
+    if val is False:
         return 'FALSE'
 
     return 'ERROR'
