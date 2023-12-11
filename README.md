@@ -5,16 +5,19 @@
 # Python Packaging - A technical demonstration
 
 The purpose of this repository is to illustrate the packaging of Python
-projects. As examples this repository contain multiple projects in different
-flavours.
+projects. It contains multiple projects in different flavours illustrating
+several use cases.
 
 The examples try to follow the current state of the art and official
-recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
-`--editable` option). More details can be found in the sub folders.
+recommendations (e.g. `pyproject.toml`, "src layout" and _Development Mode_
+via `--editable` option). More details can be found in the sub folders.
+
+Please feel free to open issues to ask questions, request support, report
+problems or suggest alternative solutions.
 
 ## TOC
 
-- [Overview](#overview)
+- [Overview of the demos](#overview-of-the-demos)
 - [Demo 01 - Simple terminal application](#demo-01-simple-terminal-application)
   - [About Python Packaging](#about-python-packaging)
   - [About the folder structure and the "src layout"](#about-the-folder-structure-and-the-src-layout)
@@ -33,27 +36,25 @@ recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
 - [Real world examples](#real-world-examples)
 - [Further reading and official sources about Python Packaging](#further-reading-and-official-sources-about-python-packaging)
 
-# Overview
-Each of the sub folders is one example and could be treated as a repository of its own.
+# Overview of the demos
 
- - `01a_terminal_helloworld_setuptools` - Simplest packaging and installing demo just print "Hello World" on standard output (usually the terminal).
- - `01b_terminal_helloworld_hatch` - Similar to the previous example
-   `01a_terminal_helloworld_setuptools` but using
-   `hatch` as build backend.
+Each sub folders is one example. They could be treated as a project folder or
+a repository.
+
+ - `01a_terminal_helloworld_setuptools` - Minimal packaging and installing demo just print "Hello World".
+ - `01b_terminal_helloworld_hatch` - Minimal packaing and installing demo using `hatch` as alternative build backend.
  - `02_gui_helloworld` - Introduce the use of dependencies using a GUI to print "Hello World" in a window.
  - `03a_i18n_setuptools` - Using GNU gettext to introduce translation of strings.
- - `03b_i18n_hatch` - Similar to the previous example `03a_i18n_setuptools`
-   but using `hatch` as build backend.
- - `04_user_and_as_root` - Run the application as regular user and "as root".
- - `05_two_import_packages` - Demonstrate two Import Packages in one Distripution package and other naming issues.
- - `06_test_coverage` - Use of `coverage.py` to calculate test coverage.
- - `07_multi_coverage` - Measure coverage of two Distribution Packages.
+ - `03b_i18n_hatch` - Handle GNU gettext translation using `hatch` as alternative build backend.
+ - `04_user_and_as_root` - Executable as regular user and administrator ("as root").
+ - `05_two_import_packages` - Demonstrate two Import Packages in one Distripution Package and other naming issues.
+ - `06_test_coverage` - Measure and report test coverage.
+ - `07_multi_coverage` - Combine test coverage measurement of two Distribution Packages into one report.
 
-Please feel free to open issues.
 
 # Demo 01 - Simple terminal application
 
-This demo starts as simpelst application possible just printing `Hello World` to the terminal to illustrate basic concepts of modern Python packaging and build-systems. The demo comes in two variants differing by the used build-backends `setuptools` and `hatch`. These concepts are covered by this demo:
+This minimal demo just printing `Hello World` to the terminal to illustrate basic concepts of modern Python packaging and build-systems. The demo comes in two variants differing by the used build-backends `setuptools` and `hatch`. The following concepts are covered by this demo:
 
  - Python Package configuration via `pyproject.toml` ([PEP 621](https://peps.python.org/pep-0621))
  - Use of the ["src layout"](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
@@ -96,9 +97,9 @@ While developing and testing a Python project (not recommended!) constructs like
 	
 The environment variable [`PYTHONPATH` and
 `sys.path`](https://docs.python.org/3/library/sys.html#sys.path) do define
-where the python interpreter looks for new modules. That variable was and is
-often manipulated to fulfil the developers needs. Today is no need anymore
-for risky and unstable hacks like this. Never touch `sys.path`.
+where the Python interpreter looks for new modules. That variable was and is
+often manipulated to fulfil the developers needs. But today there is no need
+anymore for risky and unstable hacks like this. Never touch `sys.path`.
 
 The solution is the [Development Mode](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#working-in-development-mode)
 also known as [editable install](https://pip-python3.readthedocs.io/en/latest/reference/pip_install.html#editable-installs)
@@ -111,7 +112,7 @@ the system. To install a package in _Development Mode_ `pip`'s option `-e` or `-
 
 ## Demo 01 variant "setuptools"
 
-All package related information including how to build it is located only one file named `pyproject.toml`.
+All package related information including how to build it is located in only one file named `pyproject.toml`.
 
     [build-system]
     requires = ["setuptools"]
@@ -129,13 +130,19 @@ All package related information including how to build it is located only one fi
     [tool.setuptools.package-dir]
     helloworldcli = 'src/helloworldcli'
 
-The first three lines specifing the `[build-system]`. In this demo it is the often used `setuptools`. The section `[tools.setuptools.package-dir]` do point to the location of the package files. And `helloworldterminal` in section `[project.scripts]` do name the executable of that package.
+The first three lines specifing the `[build-system]`. In this demo it is the
+widely used `setuptools`. The section `[tools.setuptools.package-dir]` do
+point to the location of the package files. And `helloworldterminal` in
+section `[project.scripts]` do name the executable of that package.
 
 [[terminal_helloworld.gif]]
 
 ## Demo 01 variant "hatch"
 
-A lot of alterntive build-systems do exists and can be used. The differences and use cases can not be covered here. Using [`hatch`](https://hatch.pypa.io) just ilustrates how to setup a build-backend in the `pyproject.toml`.
+A lot of alterntive build-systems do exists and can be used. The differences
+and use cases can not be covered here. Using [`hatch`](https://hatch.pypa.io)
+just ilustrates how to setup an alternative build-backend in the
+`pyproject.toml`. The usage of `pip` do not change.
 
     [build-system]
     requires = ['hatchling']
@@ -146,7 +153,6 @@ A lot of alterntive build-systems do exists and can be used. The differences and
     [tool.hatch.build.targets.wheel]
     packages = ['src/helloworldcli']
 
-The usage of `pip` do not change.
 
 # Demo 02 - Simple GUI application
 
