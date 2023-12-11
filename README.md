@@ -27,6 +27,8 @@ recommendations (e.g. using a `pyproject.toml` and use _Development Mode_ via
   - [Demo 03 variant "hatch"](#demo-03-variant-hatch)
 - [Demo 04 - Start application "as root"](#demo-04-start-application-as-root)
 - [Demo 05 - Multiple import packages](#demo-05-multiple-import-packages)
+- [Demo 06 - Test coverage](#demo-06-test-coverage)
+- [Demo 07 - Coverage reports combined](#demo-07-coverage-reports-combined)
 - [Eliminate redundant package information and centralize all meta data](#eliminate-redundant-package-information-and-centralize-all-meta-data)
 - [Real world examples](#real-world-examples)
 - [Further reading and official sources about Python Packaging](#further-reading-and-official-sources-about-python-packaging)
@@ -44,6 +46,8 @@ Each of the sub folders is one example and could be treated as a repository of i
    but using `hatch` as build backend.
  - `04_user_and_as_root` - Run the application as regular user and "as root".
  - `05_two_import_packages` - Demonstrate two Import Packages in one Distripution package and other naming issues.
+ - `06_test_coverage` - Use of `coverage.py` to calculate test coverage.
+ - `07_multi_coverage` - Measure coverage of two Distribution Packages.
 
 Please feel free to open issues.
 
@@ -307,24 +311,93 @@ After installation using `pip` (see previous demos) the code can be used in seve
 
 The package `howareyoupkg` do depend on `helloworldpkg`. See the file `src/howareyou/__main__.py` for details.
 
-# Demo 06 - Reporting test coverage
-tests/test_fruits.py::TestJustTrue::test_true PASSED                             [ 25%]
-tests/test_fruits.py::TestTrueOrFalse::test_error PASSED                         [ 50%]
-tests/test_fruits.py::TestTrueOrFalse::test_false PASSED                         [ 75%]
-tests/test_fruits.py::TestTrueOrFalse::test_true PASSED                          [100%]
+# Demo 06 - Test coverage
 
-Name                                                           Stmts   Miss  Cover
-----------------------------------------------------------------------------------
-/usr/local/lib/python3.9/dist-packages/iniconfig/__init__.py     122     99    19%
-/usr/local/lib/python3.9/dist-packages/tomli/__init__.py           4      0   100%
-/usr/local/lib/python3.9/dist-packages/tomli/_parser.py          458    193    58%
-/usr/local/lib/python3.9/dist-packages/tomli/_re.py               35     20    43%
-/usr/local/lib/python3.9/dist-packages/tomli/_types.py             4      0   100%
-src/fruits/__init__.py                                             8      0   100%
-tests/__init__.py                                                  0      0   100%
-tests/test_fruits.py                                              12      0   100%
-----------------------------------------------------------------------------------
-TOTAL                                                            643    312    51%
+Usage and configuration of [`coverage`](https://coverage.readthedocs.io) to
+calculate a strict _test coverage_ (Definition: How much productive code is
+executed by the code in the test suite?) for a project using `pyproject.toml`
+and the "src layout".
+
+The default behavior of `coverage` has its shortcomings and would lead into
+invalid measurements. This demo do take the following into account:
+
+- External Python libraries (third party and Python standard libs) should not included in the calculation.
+- Python files that are not loaded by the test suite should be included into the calculation as uncovered code.
+
+Install the package:
+
+    $ git clone https://codeberg.org/buhtz/tech-demo-python-packaging.git
+    $ cd tec*/06*
+    $ python3 -m pip install .
+    $ bananacli
+    Hello World! Eat a banana.
+
+Run coverage and create the report:
+
+    $ coverage run
+    $ coverage report
+
+The output should look like this:
+
+```
+Name                                                                Stmts   Miss  Cover   Missing
+-------------------------------------------------------------------------------------------------
+/home/user/.local/lib/python3.11/site-packages/banana/__init__.py       8      0   100%
+/home/user/.local/lib/python3.11/site-packages/banana/__main__.py       4      4     0%   1-6
+/home/user/.local/lib/python3.11/site-packages/banana/foo.py            2      2     0%   1-2
+-------------------------------------------------------------------------------------------------
+TOTAL                                                                  14      6    57%
+```
+
+There where no arguments or switches used on command line because the configuration reside in the `pyproject.toml` file:
+
+    [tool.coverage.run]
+    command_line = "--module pytest --verbose"
+    source = ["banana"]
+
+    [tool.coverage.report]
+    show_missing = true
+
+The `command_line` value is used by `coverage` to execute the test suite. The `source` is just the name of the Import Package. The file `foo.py` is part of the report even if it was never loaded by the test suite.
+
+# Demo 07 - Coverage reports combined
+
+As an extention to the previos demo the coverage of two seperate Distribution Packages is measured and combined.
+
+Install the both packages (`fruit` and `vegetable`) as usual. The `coverage run` need to be done on each package separate. The resulting data files (`.coverage`) then combined and reported at once and should look like this:
+
+```
+Name                                                                 Stmts   Miss  Cover
+----------------------------------------------------------------------------------------
+/home/user/.local/lib/python3.11/site-packages/cherry/__init__.py        8      1    88%
+/home/user/.local/lib/python3.11/site-packages/cherry/__main__.py        4      4     0%
+/home/user/.local/lib/python3.11/site-packages/cherry/foo.py             2      2     0%
+/home/user/.local/lib/python3.11/site-packages/pumpkin/__init__.py       8      6    25%
+/home/user/.local/lib/python3.11/site-packages/pumpkin/__main__.py       4      4     0%
+/home/user/.local/lib/python3.11/site-packages/pumpkin/bar.py            2      0   100%
+----------------------------------------------------------------------------------------
+TOTAL                                                                   28     17    39%
+```
+
+See the file `do_combined_coverage.sh` for detailed steps:
+
+    #!/usr/bin/env sh
+
+    # Run and report coverage on both distribution packages separate
+    cd fruit
+    coverage run
+    coverage report
+    cd ../vegetable
+    coverage run
+    coverage report
+    cd ..
+
+    # Combine the coverage data into one file
+    coverage combine --keep fruit/.coverage vegetable/.coverage
+
+    # Report
+    coverage report
+
 
 # Eliminate redundant package information and centralize all meta data
 
