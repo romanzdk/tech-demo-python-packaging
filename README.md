@@ -28,11 +28,11 @@ problems or suggest alternative solutions.
 - [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03---internationalization-i18n-and-localization-l10n-using-gnu-gettext)
   - [Demo 03 variant "setuptools"](#demo-03-variant-setuptools)
   - [Demo 03 variant "hatch"](#demo-03-variant-hatch)
-- [Demo 04 - Start application "as root"](#demo-04-start-application-as-root)
-- [Demo 05 - Multiple import packages](#demo-05-multiple-import-packages)
-- [Demo 06 - Test coverage](#demo-06-test-coverage)
-- [Demo 07 - Coverage reports combined](#demo-07-coverage-reports-combined)
-- [Eliminate redundant package information and centralize all meta data](#eliminate-redundant-package-information-and-centralize-all-meta-data)
+- [Demo 04 - Start application "as root"](#demo-04---start-application-as-root)
+- [Demo 05 - Multiple import packages](#demo-05---multiple-import-packages)
+- [Demo 06 - Test coverage](#demo-06---test-coverage)
+- [Demo 07 - Coverage reports combined](#demo-07---coverage-reports-combined)
+- [Demo 08 - Centralize project meta data to eliminate redundancies or how to get the version string into your application?](https://codeberg.org/buhtz/tech-demo-python-packaging/src/branch/toctest/README.md#user-content-demo-08---centralize-project-meta-data-to-eliminate-redundancies-or-how-to-get-the-version-string-into-your-application)
 - [Real world examples](#real-world-examples)
 - [Further reading and official sources about Python Packaging](#further-reading-and-official-sources-about-python-packaging)
 
@@ -42,19 +42,23 @@ Each sub folders is one example. They could be treated as a project folder or
 a repository.
 
  - `01a_terminal_helloworld_setuptools` - Minimal packaging and installing demo just print "Hello World".
- - `01b_terminal_helloworld_hatch` - Minimal packaing and installing demo using `hatch` as alternative build backend.
+ - `01b_terminal_helloworld_hatch` - Minimal packaging and installing demo using `hatch` as alternative build backend.
  - `02_gui_helloworld` - Introduce the use of dependencies using a GUI to print "Hello World" in a window.
  - `03a_i18n_setuptools` - Using GNU gettext to introduce translation of strings.
  - `03b_i18n_hatch` - Handle GNU gettext translation using `hatch` as alternative build backend.
  - `04_user_and_as_root` - Executable as regular user and administrator ("as root").
- - `05_two_import_packages` - Demonstrate two Import Packages in one Distripution Package and other naming issues.
+ - `05_two_import_packages` - Demonstrate two Import Packages in one Distribution Package and other naming issues.
  - `06_test_coverage` - Measure and report test coverage.
  - `07_multi_coverage` - Combine test coverage measurement of two Distribution Packages into one report.
+ - `08_centralize_meta_data` - Specify project meta data exclusively in ony file.
 
 
 # Demo 01 - Simple terminal application
 
-This minimal demo just printing `Hello World` to the terminal to illustrate basic concepts of modern Python packaging and build-systems. The demo comes in two variants differing by the used build-backends `setuptools` and `hatch`. The following concepts are covered by this demo:
+This minimal demo just printing `Hello World` to the terminal to illustrate
+basic concepts of modern Python packaging and build-systems. The demo comes in
+two variants differing by the used build-backends `setuptools` and
+`hatch`. The following concepts are covered by this demo:
 
  - Python Package configuration via `pyproject.toml` ([PEP 621](https://peps.python.org/pep-0621))
  - Use of the ["src layout"](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
@@ -66,11 +70,18 @@ The comments in the files do contain more detailed explanations.
 
 ## About Python Packaging
 
-How to tie up a Python package is easy but the topic itself is not. The latter is because since Python was born in 1991 and while it's [ongoing evolution multiple packaging systems](https://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/history.html) has been created. Keep this in mind when looking around for alternative documentation and tutorials and look on their dates because they might be outdated.
+How to tie up a Python package is easy but the topic itself is not. The latter
+is because since Python was born in 1991 and while it's
+[ongoing evolution multiple packaging systems](https://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/history.html)
+has been created. Keep this in mind when looking around for alternative
+documentation and tutorials and look on their dates because they might be
+outdated.
 
 ## About the folder structure and the "src layout"
 
-This is an example of the so called [src layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/). The package-folder `helloworld-cli` is separated in a sub-folder named `src`. If you have no good reason agsinst it do it that way.
+This is an example of the so called [src layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
+The package-folder `helloworld-cli` is separated in a sub-folder named `src`.
+If you have no good reason against it do it that way.
 
     01_terminal_helloworld
     ├── LICENSE
@@ -130,7 +141,7 @@ All package related information including how to build it is located in only one
     [tool.setuptools.package-dir]
     helloworldcli = 'src/helloworldcli'
 
-The first three lines specifing the `[build-system]`. In this demo it is the
+The first three lines specifying the `[build-system]`. In this demo it is the
 widely used `setuptools`. The section `[tools.setuptools.package-dir]` do
 point to the location of the package files. And `helloworldterminal` in
 section `[project.scripts]` do name the executable of that package.
@@ -139,9 +150,9 @@ section `[project.scripts]` do name the executable of that package.
 
 ## Demo 01 variant "hatch"
 
-A lot of alterntive build-systems do exists and can be used. The differences
+A lot of alternative build-systems do exists and can be used. The differences
 and use cases can not be covered here. Using [`hatch`](https://hatch.pypa.io)
-just ilustrates how to setup an alternative build-backend in the
+just illustrates how to setup an alternative build-backend in the
 `pyproject.toml`. The usage of `pip` do not change.
 
     [build-system]
@@ -176,9 +187,9 @@ With this modification `pip` do install depending packages in the back.
 
 # Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext
 
-The [GNU gettext](https://www.gnu.org/software/gettext) localization framework is used to offer a translated version of the string `Hello World!`. The translation itself is not the topic of this demo but the handling of the translational files is in the context of Python Packing. Two variants of this demo exists differing by the used build-backends (`setuptools` and `hatch`). The latter is used because it offers a more elegant, pythonic and easier to understand solution.
+The [GNU gettext](https://www.gnu.org/software/gettext) localization framework is used to offer a translated version of the string `Hello World!`. The translation itself is not the topic of this demo but the handling of the translation files is in the context of Python Packing. Two variants of this demo exists differing by the used build-backends (`setuptools` and `hatch`). The latter is used because it offers a more elegant, pythonic and easier to understand solution.
 
-Independed from the used build-backend (`setuptools` or `hatch` in this example) the general approach is to use a _custom build step_. That step is executed before the package is installed into the system. That step use `msgfmt` in an external system call (using `subprocess.run()`) to compile the `po` files into `mo` files and create them in the appropriated folder structure.
+Independent from the used build-backend the general approach is to use a _custom build step_. That step is executed before the package is installed into the system. That step use `msgfmt` in an external system call (using `subprocess.run()`) to compile the `po` files into `mo` files and create them in the appropriated folder structure.
 After the custom build step the projects source folder will look like this:
 
     03_i18n_setuptools
@@ -241,7 +252,7 @@ build steps.
 # Demo 04 - Start application "as root"
 
 > **WARNING**:
-> This demo propagates to install it using `sudo -H`. This is prohibited
+> This demo propagates to installation via `sudo -H`. This is prohibited
 > because of [security reasons](https://askubuntu.com/a/802594/416969).
 > The author is open for alternative solutions.
 
@@ -262,14 +273,31 @@ This application failed to start because no Qt platform plugin could be initiali
 Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, xcb.
 ```
 
-In the screencast below I do install usually as a user via `python3 -m pip install .` On some systems it might help to install with admin rights via `sudo --set-home python3 -m pip install .`. Otherwise the "run as root" entry point scripts won't find the Python sources files. But I am not sure about it and I also don't think that this is the reason for the main problem.
+In the screencast below I do install usually as a user via `python3 -m pip
+install .` On some systems it might help to install with admin rights via
+`sudo --set-home python3 -m pip install .`. Otherwise the "run as root" entry
+point scripts won't find the Python sources files. But I am not sure about it
+and I also don't think that this is the reason for the main problem.
 
 [[gui_as_root.gif]]
 
-# Demo 05 - Multiple import packages
-In this demo the two terms [Distribution Package](https://packaging.python.org/en/latest/glossary/#term-Distribution-Package) and [Import Package](https://packaging.python.org/en/latest/glossary/#term-Import-Package) are explained. A Distribution Package is the entity or the name you do use when installing "a package" via `pip` (e.g. from PyPI). In this example it is `howareyouworld`. An Import Package is the name you do use in Python code when using the `import` statement. In this example there are two Import Packages named `helloworldpkg` and `howareyoupkg`. Additionally this example do installs two start scripts (entry points) named `helloworldcli` and `howareyoucli`. And as last the name of the package folders (inside `/src`) are `helloworld` and `howareyou`. The key fact is that all these elements having different names. In most projects the names will be the same and not different.
+# Demo 05 - Multiple import packages The two terms
+[Distribution Package](https://packaging.python.org/en/latest/glossary/#term-Distribution-Package)
+and [Import Package](https://packaging.python.org/en/latest/glossary/#term-Import-Package)
+and other naming issues are illustrated in this demo. A Distribution Package
+is the entity or the name you do use when installing "a package" via `pip`
+(e.g. from PyPI). In this example it is `howareyouworld`. An Import Package is
+the name you do use in Python code when using the `import` statement. In most
+Python Projects you will find similar names for this two concepts. But
+technically they are different. In this example there are two Import Packages
+named `helloworldpkg` and `howareyoupkg`.
 
-See the `pyproject.toml` to see how these names are definied:
+Additionally this example do install two start scripts (entry points) named
+`helloworldcli` and `howareyoucli`. And as last the name of the package
+folders (inside `/src`) are `helloworld` and `howareyou`. The key fact to
+notice is that all these elements have different names.
+
+See the `pyproject.toml` to see how these names are defined:
 
 
     # Distribution Package
@@ -307,16 +335,18 @@ The package `howareyoupkg` do depend on `helloworldpkg`. See the file `src/howar
 
 # Demo 06 - Test coverage
 
-Usage and configuration of [`coverage`](https://coverage.readthedocs.io) to
-calculate a strict _test coverage_ (Definition: How much productive code is
-executed by the code in the test suite?) for a project using `pyproject.toml`
-and the "src layout".
+The usage and configuration of [`coverage`](https://coverage.readthedocs.io)
+to calculate a **strict** _test coverage_ for a project using `pyproject.toml`
+and the "src layout" is illustrated. The _test coverage_ is defined as "How
+much productive code is executed by the code in the test suite?".
 
 The default behavior of `coverage` has its shortcomings and would lead into
 invalid measurements. This demo do take the following into account:
 
-- External Python libraries (third party and Python standard libs) should not included in the calculation.
-- Python files that are not loaded by the test suite should be included into the calculation as uncovered code.
+- External Python libraries (third party and Python standard libs) should not
+  included in the calculation.
+- Python files that are not loaded by the test suite should be included into
+  the calculation as uncovered code.
 
 Install the package:
 
@@ -326,7 +356,7 @@ Install the package:
     $ bananacli
     Hello World! Eat a banana.
 
-Run coverage and create the report:
+Run `coverage` and create the report:
 
     $ coverage run
     $ coverage report
@@ -343,7 +373,8 @@ Name                                                                Stmts   Miss
 TOTAL                                                                  14      6    57%
 ```
 
-There where no arguments or switches used on command line because the configuration reside in the `pyproject.toml` file:
+There where no arguments or switches used on command line because the
+configuration reside in the `pyproject.toml` file:
 
     [tool.coverage.run]
     command_line = "--module pytest --verbose"
@@ -352,13 +383,18 @@ There where no arguments or switches used on command line because the configurat
     [tool.coverage.report]
     show_missing = true
 
-The `command_line` value is used by `coverage` to execute the test suite. The `source` is just the name of the Import Package. The file `foo.py` is part of the report even if it was never loaded by the test suite.
+The `command_line` value is used by `coverage` to execute the test suite. The
+`source` is just the name of the Import Package. The file `foo.py` is part of
+the report even if it was never loaded by the test suite.
 
 # Demo 07 - Coverage reports combined
 
-As an extention to the previos demo the coverage of two seperate Distribution Packages is measured and combined.
+As an extension to the previous demo the coverage of two separate Distribution
+Packages is measured and combined.
 
-Install the both packages (`fruit` and `vegetable`) as usual. The `coverage run` need to be done on each package separate. The resulting data files (`.coverage`) then combined and reported at once and should look like this:
+Install both packages (`fruit` and `vegetable`) as usual. The `coverage run`
+need to be done on each package separate. The resulting data files
+(`.coverage`) then combined and reported at once:
 
 ```
 Name                                                                 Stmts   Miss  Cover
@@ -393,7 +429,50 @@ See the file `do_combined_coverage.sh` for detailed steps:
     coverage report
 
 
-# Eliminate redundant package information and centralize all meta data
+# Demo 08 - Centralize project meta data to eliminate redundancies or how to get the version string into your application?
+
+It is usual and often recommended to locate an applications or package meta
+data in module variables like this:
+
+	>>> import hellocentralpkg
+	>>> hellocentralpkg.__version__
+	'0.0.1'
+
+Some projects do have hard coded version strings in several code locations and
+documentation files. They use shell scripts or some tools to modify that
+version strings before each release. This is a workaround not a solution.
+
+One possible solution is the [`importlib.metadata`](https://docs.python.org/3/library/importlib.metadata.html)
+module. It gives a
+python application the opportunity to access all its meta data
+that was specified in `pyproject.toml`. 
+A helper function is offered in this demo.
+The function `_package_metadata_as_dict()` get the meta data and store it as a
+well accessible `dict` in the module variable `helloworldpkg.meta`.
+
+The file `__main__.py` do produce this output with meta data retrieved from
+`pyproject.toml`:
+
+    $ hellocentralcli
+    Hello World!
+    Application: hellocentralpkg in hellocentralapp (0.0.1)
+    License: GNU GENERAL PUBLIC LICENSE
+    Version 3, 29 June 2007
+    See License file "LICENSE".
+    Author: Christian Buhtz <c.buhtz@posteo.jp>
+    Maintainer: Christian Buhtz <c.buhtz@posteo.jp>
+    Website: https://codeberg.org/buhtz/tech-demo-python-packaging
+
+Be aware that [PEP621](https://peps.python.org/pep-0621/) about
+`pyproject.toml` & [PEP643](https://peps.python.org/pep-0643/) do offer
+[*Dynamic Meta Data*](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html#dynamic-metadata).
+The intention is good but a current shortcoming is that this feature is
+restricted to a small bunch of variables and not suited for all fields that
+are used in a `pyproject.toml`. The second shortcoming is that it is against
+the original intention of `pyproject.toml` to specify projects meta data. It
+is the humble opinion of the author of that repo that meta data shouldn't be
+specified anywhere else then the `pyproject.toml` because it ease up things
+and reduce maintainers burden.
 
 # Real world examples
  - [Hyperorg](https://codeberg.org/buhtz/hyperorg) as a command line application.

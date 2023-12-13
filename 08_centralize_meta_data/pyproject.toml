@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hellocentralapp"
+version = "0.0.1"
+description = "A demo demonstrating the usage of package meta data."
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+keywords = ["python",
+	    "cli"]
+
+# More at https://pypi.org/classifiers/
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development",
+]
+authors = [
+    {name = "Christian Buhtz", email = "c.buhtz@posteo.jp"}
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+homepage = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+repository = "https://codeberg.org/buhtz/tech-demo-python-packaging"
+
+[project.scripts]
+hellocentralcli = "hellocentralpkg.__main__:main"
+
+[tool.setuptools.package-dir]
+hellocentralpkg = 'src/hellocentral'
+
