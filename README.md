@@ -24,8 +24,8 @@ problems or suggest alternative solutions.
   - [Development Mode / Editabel installs](#development-mode-editabel-installs)
   - [Demo 01 variant "setuptools"](#demo-01-variant-setuptools)
   - [Demo 01 variant "hatch"](#demo-01-variant-hatch)
-- [Demo 02 - Simple GUI application](#demo-02-simple-gui-application)
-- [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03-internationalization-i18n-and-localization-l10n-using-gnu-gettext)
+- [Demo 02 - Simple GUI application](#demo-02---simple-gui-application)
+- [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03---internationalization-i18n-and-localization-l10n-using-gnu-gettext)
   - [Demo 03 variant "setuptools"](#demo-03-variant-setuptools)
   - [Demo 03 variant "hatch"](#demo-03-variant-hatch)
 - [Demo 04 - Start application "as root"](#demo-04-start-application-as-root)
@@ -156,7 +156,7 @@ just ilustrates how to setup an alternative build-backend in the
 
 # Demo 02 - Simple GUI application
 
-That demo illustrates the handling of dependencies in the Python Packaging process with displaying the string `Hello World!` in a GUI window. 
+That demo illustrates the handling of dependencies. It displays the string `Hello World!` in a GUI window. 
 The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is the dependency and used to create the window. The key difference to the previous demo is the use of the `dependencies` variable in the `pyproject.toml` file.
 
     [project]
@@ -170,56 +170,19 @@ The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is the dependency a
 
     # ...
 
-This results in installing depending packages in the back while installing the demo via `pip`.
+With this modification `pip` do install depending packages in the back.
 
 [[gui_helloworld.gif]]
 
 # Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext
 
-This demo use the [GNU gettext](https://www.gnu.org/software/gettext) localization framework to offer a translated version of the string `Hello World!`. The translation itself is not the topic of this demo but the handling of the translational files is.
+The [GNU gettext](https://www.gnu.org/software/gettext) localization framework is used to offer a translated version of the string `Hello World!`. The translation itself is not the topic of this demo but the handling of the translational files is in the context of Python Packing. Two variants of this demo exists differing by the used build-backends (`setuptools` and `hatch`). The latter is used because it offers a more elegant, pythonic and easier to understand solution.
 
-Two variants of this demo exists. One do use the usual `setuptools` as build-backend and the second do use [`hatch`](https://hatch.pypa.io). The latter is used because it offers a more elegant, pythonic and easier to understand solution.
-
-## Demo 03 variant "setuptools"
-
-> **NOTE**:
-> Handle this example with care. It might not be the best solution nor it is
-> pythonic. Feel free to open an Issue to provide an easier and better
-> example.
-
-A custom build step is used to compile the `po`-files using `msgfmt` into
-`mo`-files. The `mo` files are included as `package-data` files while
-installing.
-
-There is a new folder `po` in the project containing two `po` and one `pot`
-file. 
+Independed from the used build-backend (`setuptools` or `hatch` in this example) the general approach is to use a _custom build step_. That step is executed before the package is installed into the system. That step use `msgfmt` in an external system call (using `subprocess.run()`) to compile the `po` files into `mo` files and create them in the appropriated folder structure.
+After the custom build step the projects source folder will look like this:
 
     03_i18n_setuptools
-	├── README.md
-	├── pyproject.toml
-	├── setup.py
-	└── src
-            └── helloworldint
-                ├── __init__.py
-                ├── __main__.py
-                └── po
-                    ├── de.po
-                    ├── jp.po
-                    └── messages.pot
-
-The `pyproject.toml` do define `package-data`. While installing the
-build-backend `setuptools` will look for a folder `locales` and its content
-defined by the search pattern used here.
-
-	[tool.setuptools.package-data]
-	helloworldint = [
-		'locales/*/LC_MESSAGES/*.mo',
-	]
-
-Independed from the used build-backendn (`setuptools` or `hatch` in this example) the general approach here is to use a _custom build step_. That step is executed before the package is installed into the system. That step use `msgfmt` in an external system call (using `subprocess.run()`) to compile the `po` files into `mo` files and create them in the appropriated folder structure. The projects source folder will look like this:
-
-    03_i18n_setuptools
-	├── ...
+    ├── ...
         └── src
             └── helloworldint
                 ├── __init__.py
@@ -236,19 +199,44 @@ Independed from the used build-backendn (`setuptools` or `hatch` in this example
                     ├── jp.po
                     └── messages.pot
 
-The custom build step is implemented in the `setup.py` file. See that file for more details and further references.
+The files in the `po` folder are from the original source. The files in the
+`locales` folder are generate via the custom build step.
+
+## Demo 03 variant "setuptools"
+
+> **NOTE**:
+> Handle this example with care. It might not be the best solution nor it is
+> pythonic. Feel free to open an Issue to provide an easier and better
+> example.
+
+The `mo` files (generated by the custom build step) are included as
+`package-data` files while installing. The `pyproject.toml` do define
+`package-data`. The build-backend `setuptools` will look for a folder
+`locales` and its content defined by the search pattern used here.
+
+    [tool.setuptools.package-data]
+    helloworldint = [
+        'locales/*/LC_MESSAGES/*.mo',
+    ]
+
+The custom build step is implemented in the `setup.py` file. See that file for
+more details and further references.
 
 [[gui_i18n.gif]]
 
 ## Demo 03 variant "hatch"
 
-Please see the previous variant using `setuptools` to get an idea about the approach using a custom-build step. Using `hatch` as build-backend the `pyproject.toml` file is modified:
+Using `hatch` as build-backend the `pyproject.toml` file is modified:
 
     [tool.hatch.build]
     exclude = ['src/helloworldint/po']
     artifacts = ['src/helloworldint/locales/*/LC_MESSAGES/*.mo']
 
-The folder `po` is excluded because this files are useless for the installation. The `artifacts` variable takes care that the `mo` files generated by the custom build step are included in the installation. The file `hatch_build.py` is used by default to implement custom build steps. See comments in the `pyproject.toml` file to see how to use different names.
+The folder `po` is excluded because this files are used by the custom build
+step but useless for the installation. The `artifacts` variable takes care
+that the `mo` files generated by the custom build step are included in the
+installation. The file `hatch_build.py` is used by default to implement custom
+build steps.
 
 # Demo 04 - Start application "as root"
 
