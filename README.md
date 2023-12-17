@@ -81,7 +81,7 @@ outdated.
 
 This is an example of the so called "src layout" (see discussion:
 [src-layout vs. flat-layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/)).
-The package-folder `helloworld-cli` is separated in a sub-folder named `src`.
+The package-folder `helloworldcli` is separated in a sub-folder named `src`.
 If you have no good reason against it do it that way.
 
     01_terminal_helloworld
@@ -89,7 +89,7 @@ If you have no good reason against it do it that way.
     ├── pyproject.toml
     ├── README.md
     ├── src
-    │   └── helloworld-cli
+    │   └── helloworldcli
     │       ├── __init__.py
     │       └── __main__.py
     └── tests
@@ -473,7 +473,7 @@ The file `__main__.py` does produce this output with meta data retrieved from
     Website: https://codeberg.org/buhtz/tech-demo-python-packaging
 
 Be aware that [PEP621](https://peps.python.org/pep-0621/) about
-`pyproject.toml` & [PEP643](https://peps.python.org/pep-0643/) does offer
+`pyproject.toml` does offer
 [*Dynamic Meta Data*](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html#dynamic-metadata).
 The intention is good but a current shortcoming is that this feature is
 restricted to a small bunch of variables and not suited for all fields that
