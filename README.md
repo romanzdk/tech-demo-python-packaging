@@ -24,15 +24,15 @@ problems or suggest alternative solutions.
   - [Development Mode / Editabel installs](#development-mode-editabel-installs)
   - [Demo 01 variant "setuptools"](#demo-01-variant-setuptools)
   - [Demo 01 variant "hatch"](#demo-01-variant-hatch)
-- [Demo 02 - Simple GUI application](#demo-02---simple-gui-application)
-- [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03---internationalization-i18n-and-localization-l10n-using-gnu-gettext)
+- [Demo 02 - Simple GUI application](#demo-02-simple-gui-application)
+- [Demo 03 - Internationalization (i18n) and localization (l10n) using GNU gettext](#demo-03-internationalization-i18n-and-localization-l10n-using-gnu-gettext)
   - [Demo 03 variant "setuptools"](#demo-03-variant-setuptools)
   - [Demo 03 variant "hatch"](#demo-03-variant-hatch)
-- [Demo 04 - Start application "as root"](#demo-04---start-application-as-root)
-- [Demo 05 - Multiple import packages](#demo-05---multiple-import-packages)
-- [Demo 06 - Test coverage](#demo-06---test-coverage)
-- [Demo 07 - Coverage reports combined](#demo-07---coverage-reports-combined)
-- [Demo 08 - Centralize project meta data to eliminate redundancies or how to get the version string into your application?](https://codeberg.org/buhtz/tech-demo-python-packaging/src/branch/toctest/README.md#user-content-demo-08---centralize-project-meta-data-to-eliminate-redundancies-or-how-to-get-the-version-string-into-your-application)
+- [Demo 04 - Start application "as root"](#demo-04-start-application-as-root)
+- [Demo 05 - Multiple import packages](#demo-05-multiple-import-packages)
+- [Demo 06 - Test coverage](#demo-06-test-coverage)
+- [Demo 07 - Coverage reports combined](#demo-07-coverage-reports-combined)
+- [Demo 08 - Centralize project meta data to eliminate redundancies or how to get the version string into your application?](https://codeberg.org/buhtz/tech-demo-python-packaging/src/branch/toctest/README.md#demo-08-centralize-project-meta-data-to-eliminate-redundancies-or-how-to-get-the-version-string-into-your-application)
 - [Real world examples](#real-world-examples)
 - [Further reading and official sources about Python Packaging](#further-reading-and-official-sources-about-python-packaging)
 
@@ -66,7 +66,7 @@ two variants differing by the used build-backends `setuptools` and
  - Run tests and the application itself.
  - Use of `__init__.py` and `__main__.py`.
 
-The comments in the files do contain more detailed explanations.
+The comments in the files contain more detailed explanations.
 
 ## About Python Packaging
 
@@ -79,7 +79,8 @@ outdated.
 
 ## About the folder structure and the "src layout"
 
-This is an example of the so called [src layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/).
+This is an example of the so called "src layout" (see discussion:
+[src-layout vs. flat-layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/)).
 The package-folder `helloworld-cli` is separated in a sub-folder named `src`.
 If you have no good reason against it do it that way.
 
@@ -88,11 +89,11 @@ If you have no good reason against it do it that way.
     ├── pyproject.toml
     ├── README.md
     ├── src
-    │   └── helloworld-cli
-    │       ├── __init__.py
-    │       └── __main__.py
+    │   └── helloworld-cli
+    │       ├── __init__.py
+    │       └── __main__.py
     └── tests
-	└── test_dummy.py
+        └── test_dummy.py
 
 ## Development Mode / Editabel installs
 
@@ -107,7 +108,7 @@ While developing and testing a Python project (not recommended!) constructs like
     import mypackage
 	
 The environment variable [`PYTHONPATH` and
-`sys.path`](https://docs.python.org/3/library/sys.html#sys.path) do define
+`sys.path`](https://docs.python.org/3/library/sys.html#sys.path) does define
 where the Python interpreter looks for new modules. That variable was and is
 often manipulated to fulfil the developers needs. But today there is no need
 anymore for risky and unstable hacks like this. Never touch `sys.path`.
@@ -142,18 +143,18 @@ All package related information including how to build it is located in only one
     helloworldcli = 'src/helloworldcli'
 
 The first three lines specifying the `[build-system]`. In this demo it is the
-widely used `setuptools`. The section `[tools.setuptools.package-dir]` do
+widely used `setuptools`. The section `[tools.setuptools.package-dir]` does
 point to the location of the package files. And `helloworldterminal` in
-section `[project.scripts]` do name the executable of that package.
+section `[project.scripts]` does name the executable of that package.
 
 [[terminal_helloworld.gif]]
 
 ## Demo 01 variant "hatch"
 
-A lot of alternative build-systems do exists and can be used. The differences
+A lot of alternative build-systems exists and can be used. The differences
 and use cases can not be covered here. Using [`hatch`](https://hatch.pypa.io)
 just illustrates how to setup an alternative build-backend in the
-`pyproject.toml`. The usage of `pip` do not change.
+`pyproject.toml`. The usage of `pip` does not change.
 
     [build-system]
     requires = ['hatchling']
@@ -167,8 +168,11 @@ just illustrates how to setup an alternative build-backend in the
 
 # Demo 02 - Simple GUI application
 
-That demo illustrates the handling of dependencies. It displays the string `Hello World!` in a GUI window. 
-The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is the dependency and used to create the window. The key difference to the previous demo is the use of the `dependencies` variable in the `pyproject.toml` file.
+That demo illustrates the handling of dependencies. It displays the string
+`Hello World!` in a GUI window.  The GUI package
+[`PySimpleGUI`](https://www.pysimplegui.org) is the dependency and used to
+create the window. The key difference to the previous demo is the use of the
+`dependencies` variable in the `pyproject.toml` file.
 
     [project]
     name = "helloworld-gui"
@@ -181,7 +185,7 @@ The GUI package [`PySimpleGUI`](https://www.pysimplegui.org) is the dependency a
 
     # ...
 
-With this modification `pip` do install depending packages in the back.
+With this modification `pip` does install depending packages in the back.
 
 [[gui_helloworld.gif]]
 
@@ -221,7 +225,7 @@ The files in the `po` folder are from the original source. The files in the
 > example.
 
 The `mo` files (generated by the custom build step) are included as
-`package-data` files while installing. The `pyproject.toml` do define
+`package-data` files while installing. The `pyproject.toml` does define
 `package-data`. The build-backend `setuptools` will look for a folder
 `locales` and its content defined by the search pattern used here.
 
@@ -257,7 +261,7 @@ build steps.
 > The author is open for alternative solutions.
 
 > **ATTENTION**:
-> In its current state this technical demo do not work and need assistance.
+> In its current state this technical demo does not work and need assistance.
 > The issues are described in more details below.
 
 This is the error message
@@ -289,10 +293,12 @@ is the entity or the name you do use when installing "a package" via `pip`
 (e.g. from PyPI). In this example it is `howareyouworld`. An Import Package is
 the name you do use in Python code when using the `import` statement. In most
 Python Projects you will find similar names for this two concepts. But
-technically they are different. In this example there are two Import Packages
+technically they are different
+(see [Distribution package vs. import package](https://packaging.python.org/en/latest/discussions/distribution-package-vs-import-package)).
+In this example there are two Import Packages
 named `helloworldpkg` and `howareyoupkg`.
 
-Additionally this example do install two start scripts (entry points) named
+Additionally this example does install two start scripts (entry points) named
 `helloworldcli` and `howareyoucli`. And as last the name of the package
 folders (inside `/src`) are `helloworld` and `howareyou`. The key fact to
 notice is that all these elements have different names.
@@ -331,7 +337,8 @@ After installation using `pip` (see previous demos) the code can be used in seve
     >>> import helloworldpkg
     >>> import howareyoupkg
 
-The package `howareyoupkg` do depend on `helloworldpkg`. See the file `src/howareyou/__main__.py` for details.
+The package `howareyoupkg` does depend on `helloworldpkg`.
+See the file `src/howareyou/__main__.py` for details.
 
 # Demo 06 - Test coverage
 
@@ -341,7 +348,7 @@ and the "src layout" is illustrated. The _test coverage_ is defined as "How
 much productive code is executed by the code in the test suite?".
 
 The default behavior of `coverage` has its shortcomings and would lead into
-invalid measurements. This demo do take the following into account:
+invalid measurements. This demo does take the following into account:
 
 - External Python libraries (third party and Python standard libs) should not
   included in the calculation.
@@ -438,7 +445,7 @@ data in module variables like this:
 	>>> hellocentralpkg.__version__
 	'0.0.1'
 
-Some projects do have hard coded version strings in several code locations and
+Some projects have hard coded version strings in several code locations and
 documentation files. They use shell scripts or some tools to modify that
 version strings before each release. This is a workaround not a solution.
 
@@ -450,7 +457,7 @@ A helper function is offered in this demo.
 The function `_package_metadata_as_dict()` get the meta data and store it as a
 well accessible `dict` in the module variable `helloworldpkg.meta`.
 
-The file `__main__.py` do produce this output with meta data retrieved from
+The file `__main__.py` does produce this output with meta data retrieved from
 `pyproject.toml`:
 
     $ hellocentralcli
@@ -464,7 +471,7 @@ The file `__main__.py` do produce this output with meta data retrieved from
     Website: https://codeberg.org/buhtz/tech-demo-python-packaging
 
 Be aware that [PEP621](https://peps.python.org/pep-0621/) about
-`pyproject.toml` & [PEP643](https://peps.python.org/pep-0643/) do offer
+`pyproject.toml` & [PEP643](https://peps.python.org/pep-0643/) does offer
 [*Dynamic Meta Data*](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html#dynamic-metadata).
 The intention is good but a current shortcoming is that this feature is
 restricted to a small bunch of variables and not suited for all fields that
@@ -481,8 +488,9 @@ and reduce maintainers burden.
 # Further reading and official sources about Python Packaging
  - [Python Packaging User Guide](https://packaging.python.org) especially in there
    - the [section about the project layout](https://packaging.python.org/en/latest/tutorials/packaging-projects/) using a `src` folder
-   - and the discussion [src layout vs flat layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout)
-   - and [the Packaing tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects).
+   - and the discussion about [src layout vs flat layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout)
+   - and [the Packaing tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects)
+   - and [Distribution package vs. import package](https://packaging.python.org/en/latest/discussions/distribution-package-vs-import-package).
  - [Configuring setuptools using `pyproject.toml`](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html)
  - [PEP 621 - Storing project metadata in `pyproject.tom`](https://peps.python.org/pep-0621)
  - [PEP 517 – A build-system independent format for source trees](https://peps.python.org/pep-0517)
