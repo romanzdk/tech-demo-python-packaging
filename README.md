@@ -32,7 +32,7 @@ problems or suggest alternative solutions.
 - [Demo 05 - Multiple import packages](#demo-05-multiple-import-packages)
 - [Demo 06 - Test coverage](#demo-06-test-coverage)
 - [Demo 07 - Coverage reports combined](#demo-07-coverage-reports-combined)
-- [Demo 08 - Centralize project meta data to eliminate redundancies or how to get the version string into your application?](https://codeberg.org/buhtz/tech-demo-python-packaging/src/branch/toctest/README.md#demo-08-centralize-project-meta-data-to-eliminate-redundancies-or-how-to-get-the-version-string-into-your-application)
+- [Demo 08 - Centralize project meta data to eliminate redundancies or how to get the version string into your application?](#demo-08-centralize-project-meta-data-to-eliminate-redundancies-or-how-to-get-the-version-string-into-your-application)
 - [Real world examples](#real-world-examples)
 - [Further reading and official sources about Python Packaging](#further-reading-and-official-sources-about-python-packaging)
 
@@ -285,7 +285,9 @@ and I also don't think that this is the reason for the main problem.
 
 [[gui_as_root.gif]]
 
-# Demo 05 - Multiple import packages The two terms
+# Demo 05 - Multiple import packages
+
+The two terms
 [Distribution Package](https://packaging.python.org/en/latest/glossary/#term-Distribution-Package)
 and [Import Package](https://packaging.python.org/en/latest/glossary/#term-Import-Package)
 and other naming issues are illustrated in this demo. A Distribution Package
