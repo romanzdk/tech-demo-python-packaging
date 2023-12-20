@@ -127,7 +127,7 @@ the system. To install a package in _Development Mode_ `pip`'s option `-e` or `-
 All package related information including how to build it is located in only one file named `pyproject.toml`.
 
     [build-system]
-    requires = ["setuptools"]
+    requires = ["setuptools >= 61.0.0"]
     build-backend = "setuptools.build_meta"
 
     # ...
@@ -143,7 +143,9 @@ All package related information including how to build it is located in only one
     helloworldcli = 'src/helloworldcli'
 
 The first three lines specifying the `[build-system]`. In this demo it is the
-widely used `setuptools`. The section `[tools.setuptools.package-dir]` does
+widely used `setuptools`. Its version is restricted to 61 or higher because the
+support for `pyproject.toml` was introduced with that version in March 2022.
+The section `[tools.setuptools.package-dir]` does
 point to the location of the package files. And `helloworldterminal` in
 section `[project.scripts]` does name the executable of that package.
 
