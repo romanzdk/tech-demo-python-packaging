@@ -18,6 +18,8 @@ problems or suggest alternative solutions.
 ## TOC
 
 - [Overview of the demos](#overview-of-the-demos)
+- [Potential problems and their solutions](#potential-problems-and-their-solutions)
+   - [Missing PEP 660 (pyproject.toml) support](#missing-pep-660-pyproject-toml-support)
 - [Demo 01 - Simple terminal application](#demo-01-simple-terminal-application)
   - [About Python Packaging](#about-python-packaging)
   - [About the folder structure and the "src layout"](#about-the-folder-structure-and-the-src-layout)
@@ -52,6 +54,19 @@ a repository.
  - `07_multi_coverage` - Combine test coverage measurement of two Distribution Packages into one report.
  - `08_centralize_meta_data` - Specify project meta data exclusively in ony file.
 
+# Potential problems and their solutions
+## Missing PEP 660 (pyproject.toml) support
+The following error message can occur when installing one of the demos.
+
+      Checking if build backend supports build_editable ... done
+    ERROR: Project file:///XYZ has a 'pyproject.toml' and its build backend
+    is missing the 'build_editable' hook. Since it does not have a 'setup.py'
+    nor a 'setup.cfg', it cannot be installed in editable mode.
+    Consider using a build backend that supports PEP 660.
+    
+The reason is a `setuptools` package older then version `61.0.0`. Upgrade
+`setuptools` (or `pip`) with the package manager of your choice; e.g. `python3
+-m pip install --upgrade setuptools`.
 
 # Demo 01 - Simple terminal application
 
@@ -150,6 +165,75 @@ point to the location of the package files. And `helloworldterminal` in
 section `[project.scripts]` does name the executable of that package.
 
 [[terminal_helloworld.gif]]
+
+Again the necessary commands to install and run:
+
+    git clone https://codeberg.org/buhtz/tech-demo-python-packaging.git
+    cd tec*/01a*
+    python3 -m pip install --editable .
+    helloworldterminal
+
+And the full output:
+
+    $ git clone https://codeberg.org/buhtz/tech-demo-python-packaging.git
+    Cloning into 'tech-demo-python-packaging'...
+    remote: Enumerating objects: 363, done.
+    remote: Counting objects: 100% (363/363), done.
+    remote: Compressing objects: 100% (331/331), done.
+    remote: Total 363 (delta 158), reused 0 (delta 0), pack-reused 0
+    Receiving objects: 100% (363/363), 7.08 MiB | 1.81 MiB/s, done.
+    Resolving deltas: 100% (158/158), done.
+
+    $ cd tec*/01a*
+    $ python3 -m pip install --editable .
+    Defaulting to user installation because normal site-packages is not writeable
+    Obtaining file:///home/user/tech-demo-python-packaging/01a_terminal_helloworld_setuptools
+    Installing build dependencies ... done
+    Checking if build backend supports build_editable ... done
+    Getting requirements to build editable ... done
+    Installing backend dependencies ... done
+    Preparing editable metadata (pyproject.toml) ... done
+    Building wheels for collected packages: helloworld-cli
+    Building editable for helloworld-cli (pyproject.toml) ... done
+    Created wheel for helloworld-cli: filename=helloworld_cli-0.0.1-0.editable-py3-none-any.whl size=26798 sha256=aed4d9190a07f5d993ec4d8001f13a8b71cfa3c1276b962e660e15f67369fc9a
+    Stored in directory: /tmp/pip-ephem-wheel-cache-vgxzidv7/wheels/20/1c/e6/5c3d25d5ae15a2af7acd3677ea8149a76282633e96798cd784
+    Successfully built helloworld-cli
+    DEPRECATION: gpg 1.14.0-unknown has a non-standard version number. pip 24.0 will enforce this behaviour change. A possible replacement is to upgrade to a newer version of gpg or contact the author to suggest that they release a version with a conforming version number. Discussion can be found at https://github.com/pypa/pip/issues/12063
+    Installing collected packages: helloworld-cli
+    Successfully installed helloworld-cli-0.0.1
+
+    $ helloworldterminal
+    Hello World!
+
+    $ whereis helloworldterminal
+    helloworldterminal: /home/user/.local/bin/helloworldterminal
+
+    $ pytest -v
+    ===================================== test session starts =====================================
+    platform linux -- Python 3.9.2, pytest-7.4.2, pluggy-1.3.0 -- /usr/bin/python3
+    cachedir: .pytest_cache
+    hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase(PosixPath('/home/user/tech-demo-python-packaging/01a_terminal_helloworld_setuptools/.hypothesis/examples'))
+    rootdir: /home/user/tech-demo-python-packaging/01a_terminal_helloworld_setuptools
+    plugins: hypothesis-6.92.2, pyfakefs-5.2.4, anyio-4.2.0
+    collected 2 items                                                                             
+
+    tests/test_dummy.py::DummyTest::test_dummy PASSED                                       [ 50%]
+    tests/test_dummy.py::DummyTest::test_import PASSED                                      [100%]
+
+
+    ====================================== 2 passed in 2.13s ======================================
+
+    $ python3 -m pip uninstall helloworld-cli
+    Found existing installation: helloworld-cli 0.0.1
+    Uninstalling helloworld-cli-0.0.1:
+    Would remove:
+        /home/user/.local/bin/helloworldterminal
+        /home/user/.local/lib/python3.9/site-packages/__editable__.helloworld_cli-0.0.1.pth
+        /home/user/.local/lib/python3.9/site-packages/__editable___helloworld_cli_0_0_1_finder.py
+        /home/user/.local/lib/python3.9/site-packages/helloworld_cli-0.0.1.dist-info/*
+    Proceed (Y/n)? Y
+    Successfully uninstalled helloworld-cli-0.0.1
+
 
 ## Demo 01 variant "hatch"
 
