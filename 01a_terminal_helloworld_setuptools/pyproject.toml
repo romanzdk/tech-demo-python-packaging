@@ -1,5 +1,8 @@
 [build-system]
 # Support for pyproject.toml was introduced in 61.0.0.
+# Attention: If setuptools version is lower then this it is not able to
+# fullfill this requirement itself. Setuptools need to be upgraded manually,
+# e.g. via "python3 -m pip --upgrade setuptools".
 requires = ["setuptools >= 61.0.0"]
 build-backend = "setuptools.build_meta"
 
