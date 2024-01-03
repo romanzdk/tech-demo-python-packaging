@@ -341,27 +341,11 @@ build steps.
 
 # Demo 04 - Start application "as root"
 
-> **WARNING**:
-> This demo propagates to installation via `sudo -H`. This is prohibited
-> because of [security reasons](https://askubuntu.com/a/802594/416969).
-> The author is open for alternative solutions.
-
 > **ATTENTION**:
-> In its current state this technical demo does not work and need assistance.
-> The issues are described in more details below.
-
-This is the error message
-
-```
-Running with PID "6923" as user "root".
-Authorization required, but no authorization protocol specified
-
-qt.qpa.xcb: could not connect to display :10.0
-qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
-This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
-
-Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, xcb.
-```
+> This technical demo might have security implications. The authors
+> recommendation is to use this approach only in development context but not
+> for regular users. The latter should install an application using the 
+> package manager of their own Linux distributions (e.g. apt, pacman, etc).
 
 In the screencast below I do install usually as a user via `python3 -m pip
 install .` On some systems it might help to install with admin rights via

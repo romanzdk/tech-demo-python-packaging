@@ -1,5 +1,6 @@
 import sys
 import os
+import pathlib
 import getpass
 import shutil
 from PyQt5.QtWidgets import QApplication
@@ -18,10 +19,16 @@ def run_main_as_root_via_policykit():
     python_path = os.environ.get('PYTHONPATH', '')
     python_path = f'{python_path}:{user_sitepackages_path}'
 
+    xauthority = os.environ.get(
+        'XAUTHORITY',
+        # Assume the regular default path. e.g. Happens when using
+        # an XRDP remote desktop where $XAUTHORITY variable is not present.
+        str(pathlib.Path.home() / '.Xauthority'))
+
     cmd = ['pkexec',
            'env',
            f'DISPLAY={os.environ["DISPLAY"]}',
-           f'XAUTHORITY={os.environ["XAUTHORITY"]}',
+           f'XAUTHORITY={xauthority}',
            f'PYTHONPATH={python_path}',
            # In most cases this is /usr/local/bin/bitgui which is not in PATH
            # of pkexec environments.
