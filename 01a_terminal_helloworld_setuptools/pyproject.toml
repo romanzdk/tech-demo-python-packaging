@@ -16,6 +16,11 @@ requires-python = ">=3.8"
 keywords = ["python",
 	    "cli"]
 
+# Dependent packages are installed automatically.
+dependencies = [
+    "pytest"
+]
+
 # More at https://pypi.org/classifiers/
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -46,9 +51,4 @@ helloworldterminal = "helloworldcli.__main__:main"
 [tool.setuptools.package-dir]
 # Location of the package folder.
 helloworldcli = 'src/helloworldcli'
-
-# Dependent packages are installed automatically.
-dependencies = [
-    "pytest"
-]
 
