@@ -46,3 +46,8 @@ helloworldterminal = "helloworldcli.__main__:main"
 [tool.setuptools.package-dir]
 # Location of the package folder.
 helloworldcli = 'src/helloworldcli'
+
+# Dependent packages are installed automatically.
+dependencies = [
+    "pytest"
+]

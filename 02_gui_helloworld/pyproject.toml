@@ -12,7 +12,8 @@ requires-python = ">=3.8"
 
 # Dependent packages are installed automatically.
 dependencies = [
-    "PySimpleGUI"
+    "PySimpleGUI",
+    "pytest"
 ]
 
 [tool.setuptools.package-dir]
